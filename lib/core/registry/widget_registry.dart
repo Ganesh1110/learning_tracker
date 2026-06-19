@@ -20,6 +20,34 @@ import 'package:learning_tracker/demos/interaction/activate_intent_demo.dart';
 import 'package:learning_tracker/explanations/interaction/activate_intent_explanation.dart';
 import 'package:learning_tracker/demos/layout/align_demo.dart';
 import 'package:learning_tracker/explanations/layout/align_explanation.dart';
+import 'package:learning_tracker/demos/painting/alignment_demo.dart';
+import 'package:learning_tracker/explanations/painting/alignment_explanation.dart';
+import 'package:learning_tracker/demos/painting/alignment_directional_demo.dart';
+import 'package:learning_tracker/explanations/painting/alignment_directional_explanation.dart';
+import 'package:learning_tracker/demos/painting/alignment_geometry_demo.dart';
+import 'package:learning_tracker/explanations/painting/alignment_geometry_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_align_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_align_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_builder_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_builder_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_container_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_container_explanation.dart';
+import 'package:learning_tracker/demos/animation/alignment_geometry_tween_demo.dart';
+import 'package:learning_tracker/explanations/animation/alignment_geometry_tween_explanation.dart';
+import 'package:learning_tracker/demos/animation/alignment_tween_demo.dart';
+import 'package:learning_tracker/explanations/animation/alignment_tween_explanation.dart';
+import 'package:learning_tracker/demos/animation/align_transition_demo.dart';
+import 'package:learning_tracker/explanations/animation/align_transition_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/always_scrollable_physics_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/always_scrollable_physics_explanation.dart';
+import 'package:learning_tracker/demos/animation/always_stopped_animation_demo.dart';
+import 'package:learning_tracker/explanations/animation/always_stopped_animation_explanation.dart';
+import 'package:learning_tracker/demos/layout/android_view_demo.dart';
+import 'package:learning_tracker/explanations/layout/android_view_explanation.dart';
+import 'package:learning_tracker/demos/layout/android_view_surface_demo.dart';
+import 'package:learning_tracker/explanations/layout/android_view_surface_explanation.dart';
+import 'package:learning_tracker/demos/animation/animatable_demo.dart';
+import 'package:learning_tracker/explanations/animation/animatable_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -213,6 +241,201 @@ Actions(
     height: 50,
     color: Colors.blue,
   ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AlignTransition',
+    category: WidgetCategory.animation,
+    description:
+        'An explicit transition widget that animates the alignment of a child widget relative to its parent using an Animation<AlignmentGeometry>.',
+    rnEquivalent: alignTransitionRnEquivalent,
+    demoBuilder: (_) => const AlignTransitionDemo(),
+    dartCode: '''AlignTransition(
+  alignment: _alignmentAnimation, // Animation<AlignmentGeometry>
+  child: const MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Alignment',
+    category: WidgetCategory.painting,
+    description:
+        'A point within a rectangle, defined by horizontal (x) and vertical (y) offsets between -1.0 and 1.0.',
+    rnEquivalent: alignmentRnEquivalent,
+    demoBuilder: (_) => const AlignmentDemo(),
+    dartCode: '''Align(
+  alignment: Alignment(-0.5, 0.8), // Custom x, y offsets
+  child: MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AlignmentDirectional',
+    category: WidgetCategory.painting,
+    description:
+        'An offset that\'s expressed as a fraction of a Size, but whose horizontal component is dependent on the writing direction (LTR vs RTL).',
+    rnEquivalent: alignmentDirectionalRnEquivalent,
+    demoBuilder: (_) => const AlignmentDirectionalDemo(),
+    dartCode: '''Align(
+  alignment: AlignmentDirectional.topStart, // Automatically flips in RTL
+  child: MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AlignmentGeometry',
+    category: WidgetCategory.painting,
+    description:
+        'Base class for Alignment and AlignmentDirectional that allows for text-direction aware resolution.',
+    rnEquivalent: alignmentGeometryRnEquivalent,
+    demoBuilder: (_) => const AlignmentGeometryDemo(),
+    dartCode: '''// Accepts either Alignment or AlignmentDirectional
+final AlignmentGeometry alignment = isRtl
+    ? AlignmentDirectional.topStart
+    : Alignment.topRight;
+
+Align(
+  alignment: alignment,
+  child: MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AlignmentGeometryTween',
+    category: WidgetCategory.animation,
+    description:
+        'An interpolation tween between two AlignmentGeometry values, enabling smooth direction-aware layout transitions.',
+    rnEquivalent: alignmentGeometryTweenRnEquivalent,
+    demoBuilder: (_) => const AlignmentGeometryTweenDemo(),
+    dartCode: '''AlignmentGeometryTween(
+  begin: AlignmentDirectional.topStart,
+  end: Alignment.bottomRight,
+).animate(_controller);''',
+  ),
+  WidgetInfo(
+    name: 'AlignmentTween',
+    category: WidgetCategory.animation,
+    description:
+        'An interpolation tween between two absolute Alignment values, defining progress coordinates over a 2D Cartesian plane.',
+    rnEquivalent: alignmentTweenRnEquivalent,
+    demoBuilder: (_) => const AlignmentTweenDemo(),
+    dartCode: '''AlignmentTween(
+  begin: Alignment(-0.8, -0.8),
+  end: Alignment(0.8, 0.8),
+).animate(_controller);''',
+  ),
+  WidgetInfo(
+    name: 'AlwaysScrollableScrollPhysics',
+    category: WidgetCategory.scrolling,
+    description:
+        'Scroll physics that always allows scrolling gestures and bounces, even if the list content is shorter than its container viewport.',
+    rnEquivalent: alwaysScrollableScrollPhysicsRnEquivalent,
+    demoBuilder: (_) => const AlwaysScrollableScrollPhysicsDemo(),
+    dartCode: '''ListView.builder(
+  physics: const AlwaysScrollableScrollPhysics(),
+  itemBuilder: (context, index) => ListTile(title: Text('Item \$index')),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AlwaysStoppedAnimation',
+    category: WidgetCategory.animation,
+    description:
+        'A subclass of Animation that remains locked at a static, constant value, avoiding full AnimationController lifecycles where Animation parameters are required.',
+    rnEquivalent: alwaysStoppedAnimationRnEquivalent,
+    demoBuilder: (_) => const AlwaysStoppedAnimationDemo(),
+    dartCode: '''CircularProgressIndicator(
+  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AndroidView',
+    category: WidgetCategory.layout,
+    description:
+        'Embeds a native Android View inside the Flutter widget hierarchy using Virtual Display offscreen texture compositing.',
+    rnEquivalent: androidViewRnEquivalent,
+    demoBuilder: (_) => const AndroidViewDemo(),
+    dartCode: '''AndroidView(
+  viewType: 'my-native-button-view',
+  creationParams: {'text': 'Click Me'},
+  creationParamsCodec: const StandardMessageCodec(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AndroidViewSurface',
+    category: WidgetCategory.layout,
+    description:
+        'Embeds a native Android view using Hybrid Composition, placing it directly inside the native view tree for full keyboard, accessibility, and overlay support.',
+    rnEquivalent: androidViewSurfaceRnEquivalent,
+    demoBuilder: (_) => const AndroidViewSurfaceDemo(),
+    dartCode: '''PlatformViewLink(
+  viewType: 'my-native-text-input',
+  surfaceFactory: (context, controller) {
+    return AndroidViewSurface(
+      controller: controller as AndroidViewController,
+      gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+      hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+    );
+  },
+  onCreatePlatformView: params.onCreatePlatformView,
+)''',
+  ),
+  WidgetInfo(
+    name: 'Animatable',
+    category: WidgetCategory.animation,
+    description:
+        'An abstract base class for objects (like Tweens) that transform a double progress input into an output value of type T, supporting chained configurations.',
+    rnEquivalent: animatableRnEquivalent,
+    demoBuilder: (_) => const AnimatableDemo(),
+    dartCode: '''final Animatable<double> sizeTween = Tween<double>(begin: 50.0, end: 120.0)
+    .chain(CurveTween(curve: Curves.bounceOut));
+
+double currentSize = sizeTween.evaluate(_controller);''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedAlign',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that automatically transitions a child\'s position over a given duration whenever the given alignment changes.',
+    rnEquivalent: animatedAlignRnEquivalent,
+    demoBuilder: (_) => const AnimatedAlignDemo(),
+    dartCode: '''AnimatedAlign(
+  alignment: _alignment,
+  curve: Curves.easeInOut,
+  duration: const Duration(milliseconds: 500),
+  child: const FlutterLogo(size: 50),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedBuilder',
+    category: WidgetCategory.animation,
+    description:
+        'A general-purpose widget for building animations by separating the animation controller logic from the widget rendering subtree.',
+    rnEquivalent: animatedBuilderRnEquivalent,
+    demoBuilder: (_) => const AnimatedBuilderDemo(),
+    dartCode: '''AnimatedBuilder(
+  animation: _controller,
+  child: const StaticLogo(), // Cached subtree, not rebuilt
+  builder: (BuildContext context, Widget? child) {
+    return Transform.rotate(
+      angle: _controller.value * 2.0 * math.pi,
+      child: child,
+    );
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedContainer',
+    category: WidgetCategory.animation,
+    description:
+        'A container widget that automatically animates changes to its size, padding, margin, color, border radius, and shadows.',
+    rnEquivalent: animatedContainerRnEquivalent,
+    demoBuilder: (_) => const AnimatedContainerDemo(),
+    dartCode: '''AnimatedContainer(
+  width: _width,
+  height: _height,
+  decoration: BoxDecoration(
+    color: _color,
+    borderRadius: BorderRadius.circular(_radius),
+  ),
+  duration: const Duration(milliseconds: 500),
+  curve: Curves.fastOutSlowIn,
+  child: const Center(child: Text('Animate me')),
 )''',
   ),
 ];
