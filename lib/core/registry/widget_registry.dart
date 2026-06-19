@@ -69,6 +69,16 @@ import 'package:learning_tracker/demos/animation/animated_switcher_demo.dart';
 import 'package:learning_tracker/explanations/animation/animated_switcher_explanation.dart';
 import 'package:learning_tracker/demos/animation/animated_widget_demo.dart';
 import 'package:learning_tracker/explanations/animation/animated_widget_explanation.dart';
+import 'package:learning_tracker/demos/layout/aspect_ratio_demo.dart';
+import 'package:learning_tracker/explanations/layout/aspect_ratio_explanation.dart';
+import 'package:learning_tracker/demos/input/autofill_group_demo.dart';
+import 'package:learning_tracker/explanations/input/autofill_group_explanation.dart';
+import 'package:learning_tracker/demos/interaction/back_button_listener_demo.dart';
+import 'package:learning_tracker/explanations/interaction/back_button_listener_explanation.dart';
+import 'package:learning_tracker/demos/painting/backdrop_filter_demo.dart';
+import 'package:learning_tracker/explanations/painting/backdrop_filter_explanation.dart';
+import 'package:learning_tracker/demos/painting/banner_demo.dart';
+import 'package:learning_tracker/explanations/painting/banner_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -657,4 +667,95 @@ AnimatedList(
   }
 }''',
   ),
+  WidgetInfo(
+    name: 'AspectRatio',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that attempts to size the child to a specific aspect ratio, enforcing the ratio constraints within its parent.',
+    rnEquivalent: aspectRatioRnEquivalent,
+    demoBuilder: (_) => const AspectRatioDemo(),
+    dartCode: '''AspectRatio(
+  aspectRatio: 16 / 9,
+  child: Container(
+    color: Colors.blue,
+    child: Center(child: Text('16:9 Aspect Ratio')),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AutofillGroup',
+    category: WidgetCategory.input,
+    description:
+        'An input group widget that binds text fields under a single autofill context scope for password managers and credential auto-fill engines.',
+    rnEquivalent: autofillGroupRnEquivalent,
+    demoBuilder: (_) => const AutofillGroupDemo(),
+    dartCode: '''AutofillGroup(
+  child: Column(
+    children: [
+      TextFormField(
+        autofillHints: const [AutofillHints.username],
+        decoration: const InputDecoration(labelText: 'Username'),
+      ),
+      TextFormField(
+        autofillHints: const [AutofillHints.password],
+        obscureText: true,
+        decoration: const InputDecoration(labelText: 'Password'),
+      ),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'BackButtonListener',
+    category: WidgetCategory.interaction,
+    description:
+        'A navigation utility widget that registers a callback to listen to and intercept system/hardware back gestures.',
+    rnEquivalent: backButtonListenerRnEquivalent,
+    demoBuilder: (_) => const BackButtonListenerDemo(),
+    dartCode: '''BackButtonListener(
+  onBackButtonPressed: () async {
+    final bool shouldPreventPop = await checkUnsavedChanges();
+    return shouldPreventPop; // Return true to consume the press and prevent exit
+  },
+  child: MyFormScreen(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'BackdropFilter',
+    category: WidgetCategory.painting,
+    description:
+        'A painting widget that applies a blur, color filter, or matrix effect to the already painted pixels behind itself.',
+    rnEquivalent: backdropFilterRnEquivalent,
+    demoBuilder: (_) => const BackdropFilterDemo(),
+    dartCode: '''ClipRRect(
+  borderRadius: BorderRadius.circular(16),
+  child: Stack(
+    children: [
+      Image.network('url'),
+      BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+        child: Container(
+          color: Colors.black.withOpacity(0.2),
+          child: Text('Frosted Overlay'),
+        ),
+      ),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Banner',
+    category: WidgetCategory.painting,
+    description:
+        'A decorative widget that overlays a tilted diagonal badge banner in one of the corners of its child.',
+    rnEquivalent: bannerRnEquivalent,
+    demoBuilder: (_) => const BannerDemo(),
+    dartCode: '''Banner(
+  message: 'SALE',
+  location: BannerLocation.topEnd,
+  color: Colors.red,
+  child: ProductCard(),
+)''',
+  ),
 ];
+
