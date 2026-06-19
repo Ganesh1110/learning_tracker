@@ -59,6 +59,16 @@ import 'package:learning_tracker/explanations/animation/animated_grid_explanatio
 import 'package:learning_tracker/explanations/animation/animated_grid_state_explanation.dart';
 import 'package:learning_tracker/demos/animation/animated_list_demo.dart';
 import 'package:learning_tracker/explanations/animation/animated_list_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_modal_barrier_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_modal_barrier_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_size_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_size_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_slide_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_slide_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_switcher_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_switcher_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_widget_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_widget_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -570,5 +580,81 @@ AnimatedList(
   curve: Curves.fastOutSlowIn,
   child: const Center(child: Text('Animate me')),
 )''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedModalBarrier',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that prevents the user from interacting with widgets behind itself, and can be configured with an animated color value.',
+    rnEquivalent: animatedModalBarrierRnEquivalent,
+    demoBuilder: (_) => const AnimatedModalBarrierDemo(),
+    dartCode: '''AnimatedModalBarrier(
+  color: _colorAnimation, // Animation<Color?>
+  dismissible: true,
+  onDismiss: () => print('Dismissed'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedSize',
+    category: WidgetCategory.animation,
+    description:
+        'Animated widget that automatically transitions its size over a given duration whenever the given child\'s size changes.',
+    rnEquivalent: animatedSizeRnEquivalent,
+    demoBuilder: (_) => const AnimatedSizeDemo(),
+    dartCode: '''AnimatedSize(
+  duration: const Duration(milliseconds: 400),
+  curve: Curves.easeInOut,
+  child: MyDynamicSizeWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedSlide',
+    category: WidgetCategory.animation,
+    description:
+        'Widget which automatically transitions the child\'s offset relative to its normal position whenever the given offset changes.',
+    rnEquivalent: animatedSlideRnEquivalent,
+    demoBuilder: (_) => const AnimatedSlideDemo(),
+    dartCode: '''AnimatedSlide(
+  offset: Offset(xValue, yValue), // fractional offsets
+  duration: const Duration(milliseconds: 500),
+  curve: Curves.easeInOut,
+  child: MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedSwitcher',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that by default does a cross-fade between a new widget and the widget previously set on the AnimatedSwitcher as a child.',
+    rnEquivalent: animatedSwitcherRnEquivalent,
+    demoBuilder: (_) => const AnimatedSwitcherDemo(),
+    dartCode: '''AnimatedSwitcher(
+  duration: const Duration(milliseconds: 500),
+  transitionBuilder: (Widget child, Animation<double> animation) {
+    return FadeTransition(opacity: animation, child: child);
+  },
+  child: MyCurrentChildWidget(key: ValueKey(_state)), // Unique key required
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedWidget',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that rebuilds when the given Listenable changes value, isolating rebuild scope to optimize performance.',
+    rnEquivalent: animatedWidgetRnEquivalent,
+    demoBuilder: (_) => const AnimatedWidgetDemo(),
+    dartCode: '''class PulsingHeart extends AnimatedWidget {
+  const PulsingHeart({super.key, required Animation<double> animation})
+      : super(listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = listenable as Animation<double>;
+    return Transform.scale(
+      scale: 0.8 + (progress.value * 0.4),
+      child: const Icon(Icons.favorite, color: Colors.red),
+    );
+  }
+}''',
   ),
 ];
