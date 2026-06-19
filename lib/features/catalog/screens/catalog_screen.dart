@@ -173,7 +173,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       final info = filtered[index];
                       return WidgetCard(
                         info: info,
-                        onTap: () => context.push('/widget', extra: info),
+                        onTap: () => context.push(
+                          '/widget/${Uri.encodeComponent(info.name)}',
+                          extra: info,
+                        ),
                       );
                     },
                   ),

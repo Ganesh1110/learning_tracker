@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:learning_tracker/core/models/widget_info.dart';
+import 'package:learning_tracker/core/registry/widget_registry.dart';
 import 'package:learning_tracker/shared/widgets/code_preview.dart';
 import 'package:learning_tracker/shared/widgets/rn_comparison_panel.dart';
 
 class WidgetDetailScreen extends StatelessWidget {
-  const WidgetDetailScreen({super.key});
+  final String widgetName;
+  final WidgetInfo? extraInfo;
+
+  const WidgetDetailScreen({
+    super.key,
+    required this.widgetName,
+    this.extraInfo,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final info = GoRouterState.of(context).extra as WidgetInfo;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+
+    final info = extraInfo ?? widgetRegistry.firstWhere(
+      (w) => w.name == widgetName,
+      orElse: () => widgetRegistry.first,
+    );
     final categoryColor = info.category.color;
 
     return Scaffold(

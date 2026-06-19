@@ -48,6 +48,17 @@ import 'package:learning_tracker/demos/layout/android_view_surface_demo.dart';
 import 'package:learning_tracker/explanations/layout/android_view_surface_explanation.dart';
 import 'package:learning_tracker/demos/animation/animatable_demo.dart';
 import 'package:learning_tracker/explanations/animation/animatable_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_cross_fade_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_cross_fade_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_default_text_style_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_default_text_style_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_fractionally_sized_box_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_fractionally_sized_box_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_grid_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_grid_explanation.dart';
+import 'package:learning_tracker/explanations/animation/animated_grid_state_explanation.dart';
+import 'package:learning_tracker/demos/animation/animated_list_demo.dart';
+import 'package:learning_tracker/explanations/animation/animated_list_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -386,6 +397,128 @@ Align(
     .chain(CurveTween(curve: Curves.bounceOut));
 
 double currentSize = sizeTween.evaluate(_controller);''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedCrossFade',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that cross-fades between two given children and animates its size between their sizes when the crossFadeState changes.',
+    rnEquivalent: animatedCrossFadeRnEquivalent,
+    demoBuilder: (_) => const AnimatedCrossFadeDemo(),
+    dartCode: '''AnimatedCrossFade(
+  crossFadeState: _expanded
+      ? CrossFadeState.showSecond
+      : CrossFadeState.showFirst,
+  duration: const Duration(milliseconds: 600),
+  firstCurve: Curves.easeIn,
+  secondCurve: Curves.easeOut,
+  sizeCurve: Curves.easeInOut,
+  firstChild: const CompactCard(),
+  secondChild: const ExpandedCard(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedDefaultTextStyle',
+    category: WidgetCategory.animation,
+    description:
+        'Animated version of DefaultTextStyle that automatically transitions the default text style applied to all descendant Text widgets over a given duration.',
+    rnEquivalent: animatedDefaultTextStyleRnEquivalent,
+    demoBuilder: (_) => const AnimatedDefaultTextStyleDemo(),
+    dartCode: '''AnimatedDefaultTextStyle(
+  duration: const Duration(milliseconds: 500),
+  curve: Curves.easeInOut,
+  style: TextStyle(
+    fontSize: _fontSize,
+    color: _color,
+    fontWeight: _weight,
+  ),
+  child: const Text('Flutter Widgets'), // inherits the animated style
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedFractionallySizedBox',
+    category: WidgetCategory.animation,
+    description:
+        'Animated version of FractionallySizedBox that automatically transitions its size fractions and alignment over a given duration whenever they change.',
+    rnEquivalent: animatedFractionallySizedBoxRnEquivalent,
+    demoBuilder: (_) => const AnimatedFractionallySizedBoxDemo(),
+    dartCode: '''AnimatedFractionallySizedBox(
+  duration: const Duration(milliseconds: 600),
+  curve: Curves.easeInOut,
+  widthFactor: _widthFactor,   // 0.0 to 1.0
+  heightFactor: _heightFactor, // 0.0 to 1.0
+  alignment: _alignment,
+  child: MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedGrid',
+    category: WidgetCategory.animation,
+    description:
+        'A scrolling grid container that animates items when they are inserted into or removed from the grid via AnimatedGridState.',
+    rnEquivalent: animatedGridRnEquivalent,
+    demoBuilder: (_) => const AnimatedGridDemo(),
+    dartCode: '''final GlobalKey<AnimatedGridState> _key = GlobalKey();
+
+AnimatedGrid(
+  key: _key,
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 3,
+  ),
+  initialItemCount: _items.length,
+  itemBuilder: (context, index, animation) {
+    return ScaleTransition(
+      scale: animation,
+      child: GridTile(item: _items[index]),
+    );
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedGridState',
+    category: WidgetCategory.animation,
+    description:
+        'The State for an AnimatedGrid, used to imperatively trigger animated item insertions and removals via insertItem() and removeItem().',
+    rnEquivalent: animatedGridStateRnEquivalent,
+    demoBuilder: (_) => const AnimatedGridDemo(),
+    dartCode: '''// Insert an item at index:
+_key.currentState!.insertItem(
+  index,
+  duration: const Duration(milliseconds: 400),
+);
+
+// Remove an item with exit animation:
+_key.currentState!.removeItem(
+  index,
+  (context, animation) => ScaleTransition(
+    scale: animation,
+    child: tile,
+  ),
+  duration: const Duration(milliseconds: 300),
+);''',
+  ),
+  WidgetInfo(
+    name: 'AnimatedList',
+    category: WidgetCategory.animation,
+    description:
+        'A scrolling list container that animates items with custom transitions when they are inserted or removed via AnimatedListState.',
+    rnEquivalent: animatedListRnEquivalent,
+    demoBuilder: (_) => const AnimatedListDemo(),
+    dartCode: '''final GlobalKey<AnimatedListState> _key = GlobalKey();
+
+AnimatedList(
+  key: _key,
+  initialItemCount: _items.length,
+  itemBuilder: (context, index, animation) {
+    return SizeTransition(
+      sizeFactor: animation,
+      child: FadeTransition(
+        opacity: animation,
+        child: ListRow(item: _items[index]),
+      ),
+    );
+  },
+)''',
   ),
   WidgetInfo(
     name: 'AnimatedAlign',
