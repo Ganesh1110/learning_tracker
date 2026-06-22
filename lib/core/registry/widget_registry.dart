@@ -79,6 +79,45 @@ import 'package:learning_tracker/demos/painting/backdrop_filter_demo.dart';
 import 'package:learning_tracker/explanations/painting/backdrop_filter_explanation.dart';
 import 'package:learning_tracker/demos/painting/banner_demo.dart';
 import 'package:learning_tracker/explanations/painting/banner_explanation.dart';
+import 'package:learning_tracker/demos/layout/baseline_demo.dart';
+import 'package:learning_tracker/explanations/layout/baseline_explanation.dart';
+import 'package:learning_tracker/demos/interaction/block_semantics_demo.dart';
+import 'package:learning_tracker/explanations/interaction/block_semantics_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/box_scroll_view_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/box_scroll_view_explanation.dart';
+import 'package:learning_tracker/demos/layout/builder_demo.dart';
+import 'package:learning_tracker/explanations/layout/builder_explanation.dart';
+import 'package:learning_tracker/demos/interaction/callback_shortcuts_demo.dart';
+import 'package:learning_tracker/explanations/interaction/callback_shortcuts_explanation.dart';
+import 'package:learning_tracker/demos/layout/center_demo.dart';
+import 'package:learning_tracker/explanations/layout/center_explanation.dart';
+import 'package:learning_tracker/demos/painting/clip_oval_demo.dart';
+import 'package:learning_tracker/explanations/painting/clip_oval_explanation.dart';
+import 'package:learning_tracker/demos/painting/clip_path_demo.dart';
+import 'package:learning_tracker/explanations/painting/clip_path_explanation.dart';
+import 'package:learning_tracker/demos/painting/clip_rect_demo.dart';
+import 'package:learning_tracker/explanations/painting/clip_rect_explanation.dart';
+import 'package:learning_tracker/demos/painting/clip_rrect_demo.dart';
+import 'package:learning_tracker/explanations/painting/clip_rrect_explanation.dart';
+import 'package:learning_tracker/demos/painting/clip_r_superellipse_demo.dart';
+import 'package:learning_tracker/explanations/painting/clip_r_superellipse_explanation.dart';
+import 'package:learning_tracker/demos/painting/colored_box_demo.dart';
+import 'package:learning_tracker/explanations/painting/colored_box_explanation.dart';
+import 'package:learning_tracker/demos/layout/column_demo.dart';
+import 'package:learning_tracker/explanations/layout/column_explanation.dart';
+import 'package:learning_tracker/demos/layout/composited_transform_target_demo.dart';
+import 'package:learning_tracker/explanations/layout/composited_transform_target_explanation.dart';
+import 'package:learning_tracker/explanations/layout/composited_transform_follower_explanation.dart';
+import 'package:learning_tracker/demos/layout/constrained_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/constrained_box_explanation.dart';
+import 'package:learning_tracker/demos/layout/constrained_layout_builder_demo.dart';
+import 'package:learning_tracker/explanations/layout/constrained_layout_builder_explanation.dart';
+import 'package:learning_tracker/demos/layout/constraints_transform_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/constraints_transform_box_explanation.dart';
+import 'package:learning_tracker/demos/layout/container_demo.dart';
+import 'package:learning_tracker/explanations/layout/container_explanation.dart';
+import 'package:learning_tracker/demos/layout/custom_multi_child_layout_demo.dart';
+import 'package:learning_tracker/explanations/layout/custom_multi_child_layout_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -757,5 +796,316 @@ AnimatedList(
   child: ProductCard(),
 )''',
   ),
+  WidgetInfo(
+    name: 'Baseline',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that shifts its child vertically so that the child\'s baseline aligns with a specified distance from the top of this widget.',
+    rnEquivalent: baselineRnEquivalent,
+    demoBuilder: (_) => const BaselineDemo(),
+    dartCode: '''Baseline(
+  baseline: 50.0,
+  baselineType: TextBaseline.alphabetic,
+  child: Text('Aligned Text'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'BlockSemantics',
+    category: WidgetCategory.interaction,
+    description:
+        'An accessibility helper widget that drops the semantic nodes of any widgets painted behind it in the tree, preventing screen reader focus leaks.',
+    rnEquivalent: blockSemanticsRnEquivalent,
+    demoBuilder: (_) => const BlockSemanticsDemo(),
+    dartCode: '''BlockSemantics(
+  blocking: true,
+  child: MyModalDialogOverlay(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'BoxScrollView',
+    category: WidgetCategory.scrolling,
+    description:
+        'An abstract base ScrollView subclass for scrollable widgets that deal with a single child box model viewport layout (such as ListView and GridView).',
+    rnEquivalent: boxScrollViewRnEquivalent,
+    demoBuilder: (_) => const BoxScrollViewDemo(),
+    dartCode: '''// Custom class subclassing BoxScrollView
+class CustomScrollView extends BoxScrollView {
+  const CustomScrollView({super.key});
+
+  @override
+  Widget buildChildLayout(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        Card(child: Text('Item 1')),
+      ]),
+    );
+  }
+}''',
+  ),
+  WidgetInfo(
+    name: 'Builder',
+    category: WidgetCategory.layout,
+    description:
+        'A stateless utility widget that executes its builder callback closure to build its child, exposing a nested BuildContext descendant scope.',
+    rnEquivalent: builderRnEquivalent,
+    demoBuilder: (_) => const BuilderDemo(),
+    dartCode: '''Builder(
+  builder: (BuildContext context) {
+    // This context is nested below the parent widget.
+    // Scaffold.of(context) will now resolve successfully!
+    return ElevatedButton(
+      onPressed: () => Scaffold.of(context).openDrawer(),
+      child: const Text('Open Drawer'),
+    );
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'CallbackShortcuts',
+    category: WidgetCategory.interaction,
+    description:
+        'An interaction helper widget that binds raw physical keyboard keys and shortcuts combinations directly to execution callbacks.',
+    rnEquivalent: callbackShortcutsRnEquivalent,
+    demoBuilder: (_) => const CallbackShortcutsDemo(),
+    dartCode: '''CallbackShortcuts(
+  bindings: <ShortcutActivator, VoidCallback>{
+    const SingleActivator(LogicalKeyboardKey.keyI): () => increment(),
+    const SingleActivator(LogicalKeyboardKey.keyD): () => decrement(),
+  },
+  child: Focus(
+    child: MyCounterWidget(),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Center',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that centers its child within itself, optionally sizing itself based on the child\'s dimensions using factor multipliers.',
+    rnEquivalent: centerRnEquivalent,
+    demoBuilder: (_) => const CenterDemo(),
+    dartCode: '''Center(
+  widthFactor: 1.5,
+  heightFactor: 1.5,
+  child: Container(
+    width: 100,
+    height: 100,
+    color: Colors.blue,
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ClipOval',
+    category: WidgetCategory.painting,
+    description:
+        'A widget that clips its child using an oval shape, fitting the boundary box of the child widget or a custom clipper.',
+    rnEquivalent: clipOvalRnEquivalent,
+    demoBuilder: (_) => const ClipOvalDemo(),
+    dartCode: '''ClipOval(
+  child: Image.network(
+    'https://example.com/avatar.png',
+    width: 100,
+    height: 100,
+    fit: BoxFit.cover,
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ClipPath',
+    category: WidgetCategory.painting,
+    description:
+        'A widget that clips its child using a custom programmatic geometric Path computed dynamically or via a custom clipper.',
+    rnEquivalent: clipPathRnEquivalent,
+    demoBuilder: (_) => const ClipPathDemo(),
+    dartCode: '''ClipPath(
+  clipper: TriangleClipper(),
+  child: Container(
+    width: 200,
+    height: 200,
+    color: Colors.orange,
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ClipRect',
+    category: WidgetCategory.painting,
+    description:
+        'A widget that clips its child using a rectangular boundary, preventing the child\'s paint output from bleeding outside its layout bounds.',
+    rnEquivalent: clipRectRnEquivalent,
+    demoBuilder: (_) => const ClipRectDemo(),
+    dartCode: '''ClipRect(
+  child: Align(
+    alignment: Alignment.topLeft,
+    widthFactor: 0.5,
+    heightFactor: 0.5,
+    child: Image.network('https://example.com/photo.jpg'),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ClipRRect',
+    category: WidgetCategory.painting,
+    description:
+        'A widget that clips its child using a rounded rectangle, providing clipping support for asymmetric corner radii and anti-aliasing.',
+    rnEquivalent: clipRrectRnEquivalent,
+    demoBuilder: (_) => const ClipRRectDemo(),
+    dartCode: '''ClipRRect(
+  borderRadius: BorderRadius.circular(16),
+  child: Image.network(
+    'https://example.com/image.png',
+    width: 200,
+    height: 150,
+    fit: BoxFit.cover,
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ClipRSuperellipse',
+    category: WidgetCategory.painting,
+    description:
+        'A widget that clips its child using a rounded superellipse (squircle) to produce continuous smooth corners.',
+    rnEquivalent: clipRSuperellipseRnEquivalent,
+    demoBuilder: (_) => const ClipRSuperellipseDemo(),
+    dartCode: '''ClipRSuperellipse(
+  borderRadius: BorderRadius.circular(32),
+  child: Container(
+    width: 150,
+    height: 150,
+    color: Colors.blue,
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ColoredBox',
+    category: WidgetCategory.painting,
+    description:
+        'A lightweight render tree widget that paints a solid background color behind its child without allocating a full BoxDecoration.',
+    rnEquivalent: coloredBoxRnEquivalent,
+    demoBuilder: (_) => const ColoredBoxDemo(),
+    dartCode: '''ColoredBox(
+  color: Colors.blue,
+  child: Padding(
+    padding: EdgeInsets.all(16),
+    child: Text('Content'),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Column',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that displays its children in a vertical array, offering fine-grained main-axis and cross-axis alignment features.',
+    rnEquivalent: columnRnEquivalent,
+    demoBuilder: (_) => const ColumnDemo(),
+    dartCode: '''Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
+    Text('Item 1'),
+    Text('Item 2'),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'CompositedTransformTarget',
+    category: WidgetCategory.layout,
+    description:
+        'A structural layout widget that establishes a transform anchor (target) to link a floating CompositedTransformFollower overlay.',
+    rnEquivalent: compositedTransformTargetRnEquivalent,
+    demoBuilder: (_) => const CompositedTransformTargetDemo(),
+    dartCode: '''CompositedTransformTarget(
+  link: myLayerLink,
+  child: MyAnchorButton(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'CompositedTransformFollower',
+    category: WidgetCategory.layout,
+    description:
+        'A transform follower overlay widget that links to and tracks a CompositedTransformTarget dynamically using compositor layers.',
+    rnEquivalent: compositedTransformFollowerRnEquivalent,
+    demoBuilder: (_) => const CompositedTransformTargetDemo(),
+    dartCode: '''CompositedTransformFollower(
+  link: myLayerLink,
+  targetAnchor: Alignment.bottomLeft,
+  followerAnchor: Alignment.topLeft,
+  child: MyFloatingTooltip(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ConstrainedBox',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that imposes additional, explicit BoxConstraints sizing limits on its child.',
+    rnEquivalent: constrainedBoxRnEquivalent,
+    demoBuilder: (_) => const ConstrainedBoxDemo(),
+    dartCode: '''ConstrainedBox(
+  constraints: BoxConstraints(
+    minWidth: 80,
+    maxWidth: 180,
+    minHeight: 80,
+    maxHeight: 180,
+  ),
+  child: MyChildWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ConstrainedLayoutBuilder',
+    category: WidgetCategory.layout,
+    description:
+        'An abstract base class for widgets (like LayoutBuilder) that defer their build phase until layout, providing size constraints dynamically.',
+    rnEquivalent: constrainedLayoutBuilderRnEquivalent,
+    demoBuilder: (_) => const ConstrainedLayoutBuilderDemo(),
+    dartCode: '''// Custom layout builder inheriting LayoutBuilder
+class LoggingLayoutBuilder extends LayoutBuilder {
+  const LoggingLayoutBuilder({super.key, required super.builder});
+}''',
+  ),
+  WidgetInfo(
+    name: 'ConstraintsTransformBox',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that applies a transformation to its parent constraints before passing them to its child (e.g. unconstrained width/height).',
+    rnEquivalent: constraintsTransformBoxRnEquivalent,
+    demoBuilder: (_) => const ConstraintsTransformBoxDemo(),
+    dartCode: '''ConstraintsTransformBox(
+  constraintsTransform: ConstraintsTransformBox.unconstrained,
+  child: MyOversizedWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Container',
+    category: WidgetCategory.layout,
+    description:
+        'A popular convenience widget combining common layout constraints, sizing padding, margin, styling decorations, transforms, and alignments.',
+    rnEquivalent: containerRnEquivalent,
+    demoBuilder: (_) => const ContainerDemo(),
+    dartCode: '''Container(
+  margin: EdgeInsets.all(16),
+  padding: EdgeInsets.all(16),
+  alignment: Alignment.center,
+  decoration: BoxDecoration(
+    color: Colors.blue,
+    borderRadius: BorderRadius.circular(8),
+  ),
+  child: Icon(Icons.home),
+)''',
+  ),
+  WidgetInfo(
+    name: 'CustomMultiChildLayout',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that defers the sizing and positioning of multiple children to a custom layout delegate programmatically.',
+    rnEquivalent: customMultiChildLayoutRnEquivalent,
+    demoBuilder: (_) => const CustomMultiChildLayoutDemo(),
+    dartCode: '''CustomMultiChildLayout(
+  delegate: MyCustomLayoutDelegate(),
+  children: [
+    LayoutId(id: 'avatar', child: Avatar()),
+    LayoutId(id: 'badge', child: Badge()),
+  ],
+)''',
+  ),
 ];
+
 
