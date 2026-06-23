@@ -149,6 +149,18 @@ import 'package:learning_tracker/demos/layout/directionality_demo.dart';
 import 'package:learning_tracker/explanations/layout/directionality_explanation.dart';
 import 'package:learning_tracker/demos/interaction/dismissible_demo.dart';
 import 'package:learning_tracker/explanations/interaction/dismissible_explanation.dart';
+import 'package:learning_tracker/demos/interaction/draggable_demo.dart';
+import 'package:learning_tracker/explanations/interaction/draggable_explanation.dart';
+import 'package:learning_tracker/demos/interaction/drag_target_demo.dart';
+import 'package:learning_tracker/explanations/interaction/drag_target_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/draggable_scrollable_sheet_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/draggable_scrollable_sheet_explanation.dart';
+import 'package:learning_tracker/demos/layout/error_widget_demo.dart';
+import 'package:learning_tracker/explanations/layout/error_widget_explanation.dart';
+import 'package:learning_tracker/demos/interaction/exclude_semantics_demo.dart';
+import 'package:learning_tracker/explanations/interaction/exclude_semantics_explanation.dart';
+import 'package:learning_tracker/demos/layout/expanded_demo.dart';
+import 'package:learning_tracker/explanations/layout/expanded_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1358,6 +1370,96 @@ MaterialApp(
   },
   background: Container(color: Colors.red),
   child: ListTile(title: Text('Swipe to delete')),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Draggable',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that can be dragged from a starting position to a DragTarget, carrying a data payload.',
+    rnEquivalent: draggableRnEquivalent,
+    demoBuilder: (_) => const DraggableDemo(),
+    dartCode: '''Draggable<String>(
+  data: 'cargo_item',
+  feedback: Material(
+    child: Text('Dragging...'),
+  ),
+  child: Text('Drag Me'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DragTarget',
+    category: WidgetCategory.interaction,
+    description:
+        'A target widget that receives data dropped from a Draggable widget, enabling custom drag-and-drop features.',
+    rnEquivalent: dragTargetRnEquivalent,
+    demoBuilder: (_) => const DragTargetDemo(),
+    dartCode: '''DragTarget<String>(
+  onAcceptWithDetails: (details) {
+    print('Dropped \${details.data}');
+  },
+  builder: (context, candidateData, rejectedData) {
+    return Container(child: Text('Drop Zone'));
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'DraggableScrollableSheet',
+    category: WidgetCategory.scrolling,
+    description:
+        'A container bottom-sheet that drags from the bottom of the screen and expands into a scrollable view.',
+    rnEquivalent: draggableScrollableSheetRnEquivalent,
+    demoBuilder: (_) => const DraggableScrollableSheetDemo(),
+    dartCode: '''DraggableScrollableSheet(
+  initialChildSize: 0.4,
+  minChildSize: 0.2,
+  maxChildSize: 0.9,
+  builder: (context, scrollController) {
+    return ListView.builder(
+      controller: scrollController,
+      itemBuilder: (context, index) => Text('Item \$index'),
+    );
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'ErrorWidget',
+    category: WidgetCategory.layout,
+    description:
+        'A fallback rendering widget that is displayed when a widget fails to build due to a runtime exception.',
+    rnEquivalent: errorWidgetRnEquivalent,
+    demoBuilder: (_) => const ErrorWidgetDemo(),
+    dartCode: '''ErrorWidget.withDetails(
+  message: 'Crash details',
+  error: FlutterError('Exception'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ExcludeSemantics',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that drops all accessibility semantics of its descendant widget tree.',
+    rnEquivalent: excludeSemanticsRnEquivalent,
+    demoBuilder: (_) => const ExcludeSemanticsDemo(),
+    dartCode: '''ExcludeSemantics(
+  excluding: true,
+  child: Icon(Icons.star, semanticLabel: 'Decorative'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Expanded',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that expands a child of a Row, Column, or Flex to fill all remaining available main-axis space.',
+    rnEquivalent: expandedRnEquivalent,
+    demoBuilder: (_) => const ExpandedDemo(),
+    dartCode: '''Row(
+  children: [
+    Container(width: 50),
+    Expanded(
+      child: Container(color: Colors.blue),
+    ),
+  ],
 )''',
   ),
 ];
