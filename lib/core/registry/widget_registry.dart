@@ -209,6 +209,18 @@ import 'package:learning_tracker/demos/layout/layout_builder_demo.dart';
 import 'package:learning_tracker/explanations/layout/layout_builder_explanation.dart';
 import 'package:learning_tracker/demos/layout/limited_box_demo.dart';
 import 'package:learning_tracker/explanations/layout/limited_box_explanation.dart';
+import 'package:learning_tracker/demos/layout/list_body_demo.dart';
+import 'package:learning_tracker/explanations/layout/list_body_explanation.dart';
+import 'package:learning_tracker/demos/other/listenable_builder_demo.dart';
+import 'package:learning_tracker/explanations/other/listenable_builder_explanation.dart';
+import 'package:learning_tracker/demos/interaction/listener_demo.dart';
+import 'package:learning_tracker/explanations/interaction/listener_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/list_view_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/list_view_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/list_wheel_scroll_view_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/list_wheel_scroll_view_explanation.dart';
+import 'package:learning_tracker/demos/interaction/mouse_region_demo.dart';
+import 'package:learning_tracker/explanations/interaction/mouse_region_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1888,6 +1900,94 @@ Hero(
     demoBuilder: (_) => const LimitedBoxDemo(),
     dartCode: '''LimitedBox(
   maxHeight: 100.0,
+  child: Container(color: Colors.blue),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ListBody',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that lays out its children sequentially along a given axis, forcing them to match the parent\'s cross-axis dimensions.',
+    rnEquivalent: listBodyRnEquivalent,
+    demoBuilder: (_) => const ListBodyDemo(),
+    dartCode: '''ListBody(
+  mainAxis: Axis.vertical,
+  children: [
+    Container(color: Colors.red, height: 50),
+    Container(color: Colors.blue, height: 100),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'ListenableBuilder',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that rebuilds only its builder subtree when a Listenable (like a ChangeNotifier) notifies its listeners.',
+    rnEquivalent: listenableBuilderRnEquivalent,
+    demoBuilder: (_) => const ListenableBuilderDemo(),
+    dartCode: '''ListenableBuilder(
+  listenable: myCounterNotifier,
+  builder: (context, child) {
+    return Text('Count: \${myCounterNotifier.count}');
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'Listener',
+    category: WidgetCategory.interaction,
+    description:
+        'A low-level interaction widget that calls pointer callbacks (down, move, up, cancel) directly from the OS.',
+    rnEquivalent: listenerRnEquivalent,
+    demoBuilder: (_) => const ListenerDemo(),
+    dartCode: '''Listener(
+  onPointerDown: (event) => print('Down at \${event.localPosition}'),
+  onPointerMove: (event) => print('Move to \${event.localPosition}'),
+  child: Container(color: Colors.grey),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ListView',
+    category: WidgetCategory.scrolling,
+    description:
+        'A scrollable, linear list of widgets, virtualizing rendering when built with builder constructors.',
+    rnEquivalent: listViewRnEquivalent,
+    demoBuilder: (_) => const ListViewDemo(),
+    dartCode: '''ListView.builder(
+  itemCount: 100,
+  itemBuilder: (context, index) => ListTile(
+    title: Text('Item \$index'),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ListWheelScrollView',
+    category: WidgetCategory.scrolling,
+    description:
+        'A scrollable container that places its children along a 3D cylindrical scroll wheel.',
+    rnEquivalent: listWheelScrollViewRnEquivalent,
+    demoBuilder: (_) => const ListWheelScrollViewDemo(),
+    dartCode: '''ListWheelScrollView(
+  itemExtent: 50.0,
+  diameterRatio: 1.5,
+  useMagnifier: true,
+  magnification: 1.2,
+  children: [
+    Text('Item 1'),
+    Text('Item 2'),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'MouseRegion',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that tracks mouse pointer enter, hover, and exit events, and overrides hardware mouse cursors.',
+    rnEquivalent: mouseRegionRnEquivalent,
+    demoBuilder: (_) => const MouseRegionDemo(),
+    dartCode: '''MouseRegion(
+  cursor: SystemMouseCursors.click,
+  onEnter: (event) => print('Entered region'),
+  onExit: (event) => print('Exited region'),
   child: Container(color: Colors.blue),
 )''',
   ),
