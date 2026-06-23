@@ -771,5 +771,126 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
     expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
   });
-}
 
+  // ── Batch 14 ──────────────────────────────────────────────────────────────
+
+  testWidgets('Batch 14: NavigationToolbar renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'NavigationToolbar');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 14: Navigator renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Navigator');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 14: NestedScrollView renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'NestedScrollView');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 14: NotificationListener renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'NotificationListener');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 14: Offstage renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Offstage');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 14: Opacity renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Opacity');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+}

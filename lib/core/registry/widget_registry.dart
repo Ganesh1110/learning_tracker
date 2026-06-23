@@ -221,6 +221,12 @@ import 'package:learning_tracker/demos/scrolling/list_wheel_scroll_view_demo.dar
 import 'package:learning_tracker/explanations/scrolling/list_wheel_scroll_view_explanation.dart';
 import 'package:learning_tracker/demos/interaction/mouse_region_demo.dart';
 import 'package:learning_tracker/explanations/interaction/mouse_region_explanation.dart';
+import 'package:learning_tracker/demos/layout/navigation_toolbar_demo.dart';
+import 'package:learning_tracker/demos/interaction/navigator_demo.dart';
+import 'package:learning_tracker/demos/scrolling/nested_scroll_view_demo.dart';
+import 'package:learning_tracker/demos/interaction/notification_listener_demo.dart';
+import 'package:learning_tracker/demos/layout/offstage_demo.dart';
+import 'package:learning_tracker/demos/painting/opacity_demo.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1989,6 +1995,140 @@ Hero(
   onEnter: (event) => print('Entered region'),
   onExit: (event) => print('Exited region'),
   child: Container(color: Colors.blue),
+)''',
+  ),
+
+  // ── Batch 14 ─────────────────────────────────────────────────────────
+
+  WidgetInfo(
+    name: 'NavigationToolbar',
+    category: WidgetCategory.layout,
+    description:
+        'A low-level widget that lays out a leading, middle, and trailing widget '
+        'in a horizontal bar — the internal backbone of AppBar.',
+    rnEquivalent: 'In React Native, a similar three-slot header layout is achieved '
+        'with a View + flexDirection:"row" or via headerLeft / headerTitle / '
+        'headerRight in React Navigation.',
+    demoBuilder: (_) => const NavigationToolbarDemo(),
+    dartCode: '''NavigationToolbar(
+  leading: IconButton(
+    icon: Icon(Icons.arrow_back),
+    onPressed: () {},
+  ),
+  middle: Text('Title'),
+  trailing: IconButton(
+    icon: Icon(Icons.more_vert),
+    onPressed: () {},
+  ),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'Navigator',
+    category: WidgetCategory.interaction,
+    description:
+        'Manages a stack of Route objects to implement screen transitions. '
+        'push() adds a new screen; pop() removes the top route.',
+    rnEquivalent: 'Equivalent to React Navigation\'s Stack.Navigator + '
+        'navigation.navigate() / navigation.goBack(). Flutter\'s Navigator '
+        'is built into the framework with no extra package required.',
+    demoBuilder: (_) => const NavigatorDemo(),
+    dartCode: '''Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (_) => SecondScreen(),
+  ),
+);
+
+// Back:
+Navigator.pop(context);''',
+  ),
+
+  WidgetInfo(
+    name: 'NestedScrollView',
+    category: WidgetCategory.scrolling,
+    description:
+        'Coordinates a collapsing outer sliver list (e.g. SliverAppBar) '
+        'with an independently scrolling inner body.',
+    rnEquivalent: 'In React Native you animate a collapsing header manually using '
+        'Animated + interpolated styles above a ScrollView/FlatList, or '
+        'use libraries like react-native-collapsible.',
+    demoBuilder: (_) => const NestedScrollViewDemo(),
+    dartCode: '''NestedScrollView(
+  headerSliverBuilder: (context, innerBoxIsScrolled) => [
+    SliverAppBar(
+      pinned: true,
+      expandedHeight: 200,
+      forceElevated: innerBoxIsScrolled,
+    ),
+  ],
+  body: ListView.builder(
+    itemCount: 50,
+    itemBuilder: (_, i) => ListTile(title: Text('Item \$i')),
+  ),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'NotificationListener',
+    category: WidgetCategory.interaction,
+    description:
+        'Intercepts Notification objects bubbling up the widget tree. '
+        'Commonly used to observe ScrollNotification events from descendant scrollables.',
+    rnEquivalent: 'Equivalent to the onScroll prop on ScrollView/FlatList. '
+        'NotificationListener works through the widget tree rather than explicit '
+        'prop wiring, and can intercept any Notification subclass.',
+    demoBuilder: (_) => const NotificationListenerDemo(),
+    dartCode: '''NotificationListener<ScrollNotification>(
+  onNotification: (notification) {
+    if (notification is ScrollUpdateNotification) {
+      print(notification.metrics.pixels);
+    }
+    return false;
+  },
+  child: ListView.builder(
+    itemCount: 100,
+    itemBuilder: (_, i) => ListTile(title: Text('\$i')),
+  ),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'Offstage',
+    category: WidgetCategory.layout,
+    description:
+        'Keeps its child in the widget tree (preserving state and animations) '
+        'but makes it invisible and non-interactive when offstage = true.',
+    rnEquivalent: 'No direct equivalent in React Native. opacity: 0 keeps the '
+        'subtree alive but still participates in layout and hit-testing. '
+        'Offstage additionally removes size contribution and blocks interactions.',
+    demoBuilder: (_) => const OffstageDemo(),
+    dartCode: '''Offstage(
+  offstage: true, // invisible but alive in tree
+  child: Text('Hidden but stateful'),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'Opacity',
+    category: WidgetCategory.painting,
+    description:
+        'Paints its child with a fractional opacity from 0.0 (transparent) '
+        'to 1.0 (opaque). Applies uniformly to the entire subtree.',
+    rnEquivalent: 'Every React Native View accepts an opacity style prop. '
+        'Flutter\'s Opacity widget wraps any widget and controls transparency, '
+        'identical to React Native\'s opacity style.',
+    demoBuilder: (_) => const OpacityDemo(),
+    dartCode: '''Opacity(
+  opacity: 0.5,
+  child: Text('Semi-transparent'),
+)
+
+// Animated variant:
+AnimatedOpacity(
+  opacity: _visible ? 1.0 : 0.0,
+  duration: Duration(milliseconds: 300),
+  child: Text('Fades in/out'),
 )''',
   ),
 ];
