@@ -161,6 +161,18 @@ import 'package:learning_tracker/demos/interaction/exclude_semantics_demo.dart';
 import 'package:learning_tracker/explanations/interaction/exclude_semantics_explanation.dart';
 import 'package:learning_tracker/demos/layout/expanded_demo.dart';
 import 'package:learning_tracker/explanations/layout/expanded_explanation.dart';
+import 'package:learning_tracker/demos/animation/fade_transition_demo.dart';
+import 'package:learning_tracker/explanations/animation/fade_transition_explanation.dart';
+import 'package:learning_tracker/demos/layout/fitted_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/fitted_box_explanation.dart';
+import 'package:learning_tracker/demos/layout/flexible_demo.dart';
+import 'package:learning_tracker/explanations/layout/flexible_explanation.dart';
+import 'package:learning_tracker/demos/layout/flow_demo.dart';
+import 'package:learning_tracker/explanations/layout/flow_explanation.dart';
+import 'package:learning_tracker/demos/painting/flutter_logo_demo.dart';
+import 'package:learning_tracker/explanations/painting/flutter_logo_explanation.dart';
+import 'package:learning_tracker/demos/interaction/focus_demo.dart';
+import 'package:learning_tracker/explanations/interaction/focus_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1460,6 +1472,86 @@ MaterialApp(
       child: Container(color: Colors.blue),
     ),
   ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'FadeTransition',
+    category: WidgetCategory.animation,
+    description:
+        'An explicit transition widget that animates the opacity of a child widget using an Animation<double>.',
+    rnEquivalent: fadeTransitionRnEquivalent,
+    demoBuilder: (_) => const FadeTransitionDemo(),
+    dartCode: '''FadeTransition(
+  opacity: myOpacityAnimation, // Animation<double>
+  child: MyContentWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'FittedBox',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that scales and positions its child within itself according to a specified BoxFit style.',
+    rnEquivalent: fittedBoxRnEquivalent,
+    demoBuilder: (_) => const FittedBoxDemo(),
+    dartCode: '''FittedBox(
+  fit: BoxFit.contain,
+  child: Image.asset('logo.png'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Flexible',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that controls how a child of a Row, Column, or Flex flexes, with loose or tight layout constraints.',
+    rnEquivalent: flexibleRnEquivalent,
+    demoBuilder: (_) => const FlexibleDemo(),
+    dartCode: '''Row(
+  children: [
+    Flexible(
+      fit: FlexFit.loose,
+      child: Container(width: 100, color: Colors.blue),
+    ),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'Flow',
+    category: WidgetCategory.layout,
+    description:
+        'A high-performance paint-phase layout widget that positions children dynamically using a custom FlowDelegate.',
+    rnEquivalent: flowRnEquivalent,
+    demoBuilder: (_) => const FlowDemo(),
+    dartCode: '''Flow(
+  delegate: MyRadialMenuDelegate(animation: controller),
+  children: [
+    IconButton(icon: Icon(Icons.share)),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'FlutterLogo',
+    category: WidgetCategory.painting,
+    description:
+        'A paint widget that programmatically draws the official Flutter brand logo in various layout styles.',
+    rnEquivalent: flutterLogoRnEquivalent,
+    demoBuilder: (_) => const FlutterLogoDemo(),
+    dartCode: '''FlutterLogo(
+  size: 100.0,
+  style: FlutterLogoStyle.horizontal,
+)''',
+  ),
+  WidgetInfo(
+    name: 'Focus',
+    category: WidgetCategory.interaction,
+    description:
+        'A utility widget that manages a FocusNode to track and handle spatial keyboard/touch focus changes.',
+    rnEquivalent: focusRnEquivalent,
+    demoBuilder: (_) => const FocusDemo(),
+    dartCode: '''Focus(
+  onFocusChange: (hasFocus) {
+    print('Focused: \$hasFocus');
+  },
+  child: MyFocusableWidget(),
 )''',
   ),
 ];

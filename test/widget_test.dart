@@ -409,5 +409,77 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
     expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
   });
+
+  testWidgets('Batch 9: FadeTransition renders successfully', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo = widgetRegistry.firstWhere((w) => w.name == 'FadeTransition');
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 9: FittedBox renders successfully', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo = widgetRegistry.firstWhere((w) => w.name == 'FittedBox');
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 9: Flexible renders successfully', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo = widgetRegistry.firstWhere((w) => w.name == 'Flexible');
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 9: Flow renders successfully', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo = widgetRegistry.firstWhere((w) => w.name == 'Flow');
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 9: FlutterLogo renders successfully', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo = widgetRegistry.firstWhere((w) => w.name == 'FlutterLogo');
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 9: Focus renders successfully', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo = widgetRegistry.firstWhere((w) => w.name == 'Focus');
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: Builder(builder: (context) => SingleChildScrollView(child: widgetInfo.demoBuilder(context))))));
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
 }
 
