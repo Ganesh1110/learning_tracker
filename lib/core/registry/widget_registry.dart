@@ -118,6 +118,37 @@ import 'package:learning_tracker/demos/layout/container_demo.dart';
 import 'package:learning_tracker/explanations/layout/container_explanation.dart';
 import 'package:learning_tracker/demos/layout/custom_multi_child_layout_demo.dart';
 import 'package:learning_tracker/explanations/layout/custom_multi_child_layout_explanation.dart';
+import 'package:learning_tracker/demos/painting/custom_paint_demo.dart';
+import 'package:learning_tracker/explanations/painting/custom_paint_explanation.dart';
+import 'package:learning_tracker/explanations/painting/custom_painter_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/custom_scroll_view_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/custom_scroll_view_explanation.dart';
+import 'package:learning_tracker/demos/layout/custom_single_child_layout_demo.dart';
+import 'package:learning_tracker/explanations/layout/custom_single_child_layout_explanation.dart';
+import 'package:learning_tracker/demos/painting/decorated_box_demo.dart';
+import 'package:learning_tracker/explanations/painting/decorated_box_explanation.dart';
+import 'package:learning_tracker/demos/animation/decorated_box_transition_demo.dart';
+import 'package:learning_tracker/explanations/animation/decorated_box_transition_explanation.dart';
+import 'package:learning_tracker/demos/layout/decorated_sliver_demo.dart';
+import 'package:learning_tracker/explanations/layout/decorated_sliver_explanation.dart';
+import 'package:learning_tracker/demos/other/default_asset_bundle_demo.dart';
+import 'package:learning_tracker/explanations/other/default_asset_bundle_explanation.dart';
+import 'package:learning_tracker/demos/painting/default_selection_style_demo.dart';
+import 'package:learning_tracker/explanations/painting/default_selection_style_explanation.dart';
+import 'package:learning_tracker/demos/interaction/default_text_editing_shortcuts_demo.dart';
+import 'package:learning_tracker/explanations/interaction/default_text_editing_shortcuts_explanation.dart';
+import 'package:learning_tracker/demos/text/default_text_height_behavior_demo.dart';
+import 'package:learning_tracker/explanations/text/default_text_height_behavior_explanation.dart';
+import 'package:learning_tracker/demos/text/default_text_style_demo.dart';
+import 'package:learning_tracker/explanations/text/default_text_style_explanation.dart';
+import 'package:learning_tracker/demos/animation/default_text_style_transition_demo.dart';
+import 'package:learning_tracker/explanations/animation/default_text_style_transition_explanation.dart';
+import 'package:learning_tracker/demos/text/default_widgets_localizations_demo.dart';
+import 'package:learning_tracker/explanations/text/default_widgets_localizations_explanation.dart';
+import 'package:learning_tracker/demos/layout/directionality_demo.dart';
+import 'package:learning_tracker/explanations/layout/directionality_explanation.dart';
+import 'package:learning_tracker/demos/interaction/dismissible_demo.dart';
+import 'package:learning_tracker/explanations/interaction/dismissible_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1104,6 +1135,229 @@ class LoggingLayoutBuilder extends LayoutBuilder {
     LayoutId(id: 'avatar', child: Avatar()),
     LayoutId(id: 'badge', child: Badge()),
   ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'CustomPaint',
+    category: WidgetCategory.painting,
+    description:
+        'A painting widget that provides a canvas on which to draw custom programmatic vector graphics and shapes.',
+    rnEquivalent: customPaintRnEquivalent,
+    demoBuilder: (_) => const CustomPaintDemo(),
+    dartCode: '''CustomPaint(
+  painter: MyCustomPainter(),
+  child: Center(child: Text('Canvas Content')),
+)''',
+  ),
+  WidgetInfo(
+    name: 'CustomPainter',
+    category: WidgetCategory.painting,
+    description:
+        'The abstract painter interface used by CustomPaint to define layout canvas drawing commands and repaint limits.',
+    rnEquivalent: customPainterRnEquivalent,
+    demoBuilder: (_) => const CustomPaintDemo(),
+    dartCode: '''class MyPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawCircle(Offset.zero, 10.0, Paint()..color = Colors.blue);
+  }
+  @override
+  bool shouldRepaint(covariant MyPainter oldDelegate) => false;
+}''',
+  ),
+  WidgetInfo(
+    name: 'CustomScrollView',
+    category: WidgetCategory.scrolling,
+    description:
+        'A viewport scroll container coordinating multiple custom scrolling behaviors using sliver elements (app bars, grids, lists).',
+    rnEquivalent: customScrollViewRnEquivalent,
+    demoBuilder: (_) => const CustomScrollViewDemo(),
+    dartCode: '''CustomScrollView(
+  slivers: [
+    SliverAppBar(title: Text('Sliver Header')),
+    SliverList(delegate: SliverChildBuilderDelegate(...)),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'CustomSingleChildLayout',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that defers the sizing and positioning of its single child to a custom positioning delegate.',
+    rnEquivalent: customSingleChildLayoutRnEquivalent,
+    demoBuilder: (_) => const CustomSingleChildLayoutDemo(),
+    dartCode: '''CustomSingleChildLayout(
+  delegate: MySingleChildLayoutDelegate(),
+  child: MyTargetWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DecoratedBox',
+    category: WidgetCategory.painting,
+    description:
+        'A painting widget that draws a decoration (border, gradient, shadow) either behind or in front of its child.',
+    rnEquivalent: decoratedBoxRnEquivalent,
+    demoBuilder: (_) => const DecoratedBoxDemo(),
+    dartCode: '''DecoratedBox(
+  decoration: BoxDecoration(
+    color: Colors.blue,
+    borderRadius: BorderRadius.circular(8),
+  ),
+  child: Padding(
+    padding: EdgeInsets.all(16),
+    child: Text('Content'),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DecoratedBoxTransition',
+    category: WidgetCategory.animation,
+    description:
+        'An animation transition widget that morphs a BoxDecoration dynamically using an AnimationController.',
+    rnEquivalent: decoratedBoxTransitionRnEquivalent,
+    demoBuilder: (_) => const DecoratedBoxTransitionDemo(),
+    dartCode: '''DecoratedBoxTransition(
+  decoration: myDecorationAnimation,
+  child: MyContentWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DecoratedSliver',
+    category: WidgetCategory.layout,
+    description:
+        'A layout sliver widget that wraps a sliver child with a background or foreground decoration in scroll viewports.',
+    rnEquivalent: decoratedSliverRnEquivalent,
+    demoBuilder: (_) => const DecoratedSliverDemo(),
+    dartCode: '''DecoratedSliver(
+  decoration: BoxDecoration(color: Colors.grey),
+  sliver: SliverList(...),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultAssetBundle',
+    category: WidgetCategory.layout,
+    description:
+        'A configuration widget that defines the scoped AssetBundle resolved by context-based asset loaders in its subtree.',
+    rnEquivalent: defaultAssetBundleRnEquivalent,
+    demoBuilder: (_) => const DefaultAssetBundleDemo(),
+    dartCode: '''DefaultAssetBundle(
+  bundle: MyCustomAssetBundle(),
+  child: MyAssetUserWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultSelectionStyle',
+    category: WidgetCategory.painting,
+    description:
+        'An inherited selection style widget defining highlight and cursor colors for all selectable text descendants.',
+    rnEquivalent: defaultSelectionStyleRnEquivalent,
+    demoBuilder: (_) => const DefaultSelectionStyleDemo(),
+    dartCode: '''DefaultSelectionStyle(
+  selectionColor: Colors.blue.withOpacity(0.3),
+  cursorColor: Colors.blue,
+  child: SelectableText('Selectable Content'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultTextEditingShortcuts',
+    category: WidgetCategory.interaction,
+    description:
+        'An editing keyboard shortcuts widget defining OS-level key combinations for text editing behaviors.',
+    rnEquivalent: defaultTextEditingShortcutsRnEquivalent,
+    demoBuilder: (_) => const DefaultTextEditingShortcutsDemo(),
+    dartCode: '''DefaultTextEditingShortcuts(
+  child: TextField(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultTextHeightBehavior',
+    category: WidgetCategory.text,
+    description:
+        'An inherited widget that specifies the default text height behavior for descendant Text and EditableText widgets.',
+    rnEquivalent: defaultTextHeightBehaviorRnEquivalent,
+    demoBuilder: (_) => const DefaultTextHeightBehaviorDemo(),
+    dartCode: '''DefaultTextHeightBehavior(
+  textHeightBehavior: TextHeightBehavior(
+    applyHeightToFirstAscent: true,
+    applyHeightToLastDescent: true,
+    leadingDistribution: TextLeadingDistribution.proportional,
+  ),
+  child: Text('Demo Text'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultTextStyle',
+    category: WidgetCategory.text,
+    description:
+        'An inherited widget that specifies the default text style to apply to descendant Text widgets without explicit styles.',
+    rnEquivalent: defaultTextStyleRnEquivalent,
+    demoBuilder: (_) => const DefaultTextStyleDemo(),
+    dartCode: '''DefaultTextStyle(
+  style: TextStyle(fontSize: 20.0, color: Colors.blue),
+  child: Column(
+    children: [
+      Text('Inherited Style Text'),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultTextStyleTransition',
+    category: WidgetCategory.animation,
+    description:
+        'An animated transition widget that interpolates a DefaultTextStyle using an Animation<TextStyle>.',
+    rnEquivalent: defaultTextStyleTransitionRnEquivalent,
+    demoBuilder: (_) => const DefaultTextStyleTransitionDemo(),
+    dartCode: '''DefaultTextStyleTransition(
+  style: myTextStyleAnimation, // Animation<TextStyle>
+  child: Text('Morphing Text'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'DefaultWidgetsLocalizations',
+    category: WidgetCategory.text,
+    description:
+        'A default implementation of WidgetsLocalizations that supports basic text directionality and localization properties.',
+    rnEquivalent: defaultWidgetsLocalizationsRnEquivalent,
+    demoBuilder: (_) => const DefaultWidgetsLocalizationsDemo(),
+    dartCode: '''// Used in MaterialApp delegates:
+MaterialApp(
+  localizationsDelegates: const [
+    DefaultWidgetsLocalizations.delegate,
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'Directionality',
+    category: WidgetCategory.layout,
+    description:
+        'An inherited widget that determines the ambient text directionality (LTR or RTL) for descendant widgets.',
+    rnEquivalent: directionalityRnEquivalent,
+    demoBuilder: (_) => const DirectionalityDemo(),
+    dartCode: '''Directionality(
+  textDirection: TextDirection.rtl,
+  child: Row(
+    children: [
+      Icon(Icons.arrow_back),
+      Text('Right to Left Layout'),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Dismissible',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that can be dismissed by swiping in the indicated direction, typically used for swipe-to-delete lists.',
+    rnEquivalent: dismissibleRnEquivalent,
+    demoBuilder: (_) => const DismissibleDemo(),
+    dartCode: '''Dismissible(
+  key: Key(item.id),
+  onDismissed: (direction) {
+    removeItem(item);
+  },
+  background: Container(color: Colors.red),
+  child: ListTile(title: Text('Swipe to delete')),
 )''',
   ),
 ];
