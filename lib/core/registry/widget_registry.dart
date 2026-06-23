@@ -227,6 +227,18 @@ import 'package:learning_tracker/demos/scrolling/nested_scroll_view_demo.dart';
 import 'package:learning_tracker/demos/interaction/notification_listener_demo.dart';
 import 'package:learning_tracker/demos/layout/offstage_demo.dart';
 import 'package:learning_tracker/demos/painting/opacity_demo.dart';
+import 'package:learning_tracker/demos/layout/orientation_builder_demo.dart';
+import 'package:learning_tracker/demos/layout/overflow_bar_demo.dart';
+import 'package:learning_tracker/demos/layout/overflow_box_demo.dart';
+import 'package:learning_tracker/demos/scrolling/page_view_demo.dart';
+import 'package:learning_tracker/demos/layout/padding_demo.dart';
+import 'package:learning_tracker/demos/painting/physical_model_demo.dart';
+import 'package:learning_tracker/demos/painting/physical_shape_demo.dart';
+import 'package:learning_tracker/demos/layout/placeholder_demo.dart';
+import 'package:learning_tracker/demos/layout/positioned_demo.dart';
+import 'package:learning_tracker/demos/layout/positioned_directional_demo.dart';
+import 'package:learning_tracker/demos/animation/positioned_transition_demo.dart';
+import 'package:learning_tracker/demos/layout/preferred_size_demo.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -2129,6 +2141,231 @@ AnimatedOpacity(
   opacity: _visible ? 1.0 : 0.0,
   duration: Duration(milliseconds: 300),
   child: Text('Fades in/out'),
+)''',
+  ),
+
+  // ── Batch 15 ─────────────────────────────────────────────────────────
+
+  WidgetInfo(
+    name: 'OrientationBuilder',
+    category: WidgetCategory.layout,
+    description:
+        'Rebuilds its subtree whenever the device orientation changes '
+        'between Orientation.portrait and Orientation.landscape.',
+    rnEquivalent: 'In React Native you use useWindowDimensions() and compare '
+        'width vs height to derive orientation, then trigger re-renders manually. '
+        'OrientationBuilder does this automatically.',
+    demoBuilder: (_) => const OrientationBuilderDemo(),
+    dartCode: '''OrientationBuilder(
+  builder: (context, orientation) {
+    return orientation == Orientation.landscape
+        ? Row(children: [...])
+        : Column(children: [...]);
+  },
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'OverflowBar',
+    category: WidgetCategory.layout,
+    description:
+        'Lays out children in a row. When they overflow the available '
+        'width it switches automatically to a column layout.',
+    rnEquivalent: 'No direct equivalent. In React Native you use flexWrap: '
+        '"wrap" on a View or compute onLayout to decide between row/column.',
+    demoBuilder: (_) => const OverflowBarDemo(),
+    dartCode: '''OverflowBar(
+  spacing: 8,
+  alignment: OverflowBarAlignment.end,
+  children: [
+    FilledButton(onPressed: () {}, child: Text('OK')),
+    OutlinedButton(onPressed: () {}, child: Text('Cancel')),
+  ],
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'OverflowBox',
+    category: WidgetCategory.layout,
+    description:
+        'Imposes its own max constraints on its child, allowing the child '
+        'to paint outside the parent\'s boundaries.',
+    rnEquivalent: 'No direct equivalent. React Native clips by default. '
+        'Use overflow: "visible" on a View or absolute positioning to achieve '
+        'a similar visual overflow effect.',
+    demoBuilder: (_) => const OverflowBoxDemo(),
+    dartCode: '''OverflowBox(
+  maxWidth: 300,
+  maxHeight: 200,
+  child: Container(
+    width: 300,
+    height: 200,
+    color: Colors.blue,
+  ),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'PageView',
+    category: WidgetCategory.scrolling,
+    description:
+        'A scrollable list that displays one full-screen page at a time, '
+        'snapping to each page boundary. Supports horizontal and vertical scroll.',
+    rnEquivalent: 'Equivalent to FlatList with horizontal + pagingEnabled, '
+        'or a ScrollView with pagingEnabled={true}. Libraries like '
+        'react-native-pager-view are popular dedicated equivalents.',
+    demoBuilder: (_) => const PageViewDemo(),
+    dartCode: '''PageView.builder(
+  controller: PageController(),
+  onPageChanged: (index) => print('Page: \$index'),
+  itemCount: 5,
+  itemBuilder: (context, index) => Center(
+    child: Text('Page \${index + 1}'),
+  ),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'Padding',
+    category: WidgetCategory.layout,
+    description:
+        'Adds empty space around its child using an EdgeInsets value. '
+        'The most lightweight way to inset a widget in Flutter.',
+    rnEquivalent: 'Directly equivalent to the padding style prop on a '
+        'React Native View. e.g. style={{ padding: 16 }} becomes '
+        'Padding(padding: EdgeInsets.all(16), child: ...).',
+    demoBuilder: (_) => const PaddingDemo(),
+    dartCode: '''Padding(
+  padding: EdgeInsets.all(16),
+  child: Text('Padded text'),
+)
+
+// Or with per-side control:
+Padding(
+  padding: EdgeInsets.fromLTRB(8, 12, 8, 4),
+  child: Text('Custom padding'),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'PhysicalModel',
+    category: WidgetCategory.painting,
+    description:
+        'Clips its child to a shape and paints a material elevation shadow. '
+        'The low-level building block behind Card, Material, and ElevatedButton.',
+    rnEquivalent: 'The elevation + shadowColor props on React Native\'s View '
+        '(Android) or custom shadow styles on iOS. Flutter\'s PhysicalModel '
+        'provides cross-platform consistent shadows with precise control.',
+    demoBuilder: (_) => const PhysicalModelDemo(),
+    dartCode: '''PhysicalModel(
+  elevation: 8,
+  color: Colors.white,
+  shadowColor: Colors.black,
+  borderRadius: BorderRadius.circular(12),
+  child: Padding(
+    padding: EdgeInsets.all(16),
+    child: Text('Elevated card'),
+  ),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'PhysicalShape',
+    category: WidgetCategory.painting,
+    description:
+        'Paints a physical model shape (using a custom clipper) with an elevation-based shadow.',
+    rnEquivalent: 'No direct equivalent for non-rectangular shadowed shapes. '
+        'In React Native, you typically draw custom paths via SVG with filters '
+        'or use canvas-based shadow APIs.',
+    demoBuilder: (_) => const PhysicalShapeDemo(),
+    dartCode: '''PhysicalShape(
+  clipper: TriangleClipper(),
+  elevation: 8.0,
+  color: Colors.teal,
+  shadowColor: Colors.black,
+  child: SizedBox(
+    width: 100,
+    height: 100,
+    child: Center(child: Text('Triangle')),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Placeholder',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that draws a box with a diagonal X, useful during development '
+        'to mark unfinished UI areas.',
+    rnEquivalent: 'No built-in equivalent. React Native developers usually '
+        'render placeholder Views with temporary background colors, text, or '
+        'install skeleton placeholder libraries.',
+    demoBuilder: (_) => const PlaceholderDemo(),
+    dartCode: '''Placeholder(
+  color: Colors.blueGrey,
+  strokeWidth: 2.0,
+  fallbackWidth: 100.0,
+  fallbackHeight: 100.0,
+)''',
+  ),
+  WidgetInfo(
+    name: 'Positioned',
+    category: WidgetCategory.layout,
+    description:
+        'Controls the position of a child inside a Stack widget.',
+    rnEquivalent: 'React Native\'s style properties: { position: "absolute", '
+        'top, bottom, left, right }. Unlike Flutter, any View in React Native '
+        'can host absolute children without requiring a Stack parent.',
+    demoBuilder: (_) => const PositionedDemo(),
+    dartCode: '''Positioned(
+  top: 10.0,
+  left: 20.0,
+  width: 100.0,
+  height: 50.0,
+  child: ColoredBox(color: Colors.purple),
+)''',
+  ),
+  WidgetInfo(
+    name: 'PositionedDirectional',
+    category: WidgetCategory.layout,
+    description:
+        'A direction-aware version of Positioned that respects LTR and RTL layouts.',
+    rnEquivalent: 'React Native style properties: start and end instead of '
+        'left and right. These properties automatically mirror absolute placement '
+        'based on device writing direction.',
+    demoBuilder: (_) => const PositionedDirectionalDemo(),
+    dartCode: '''PositionedDirectional(
+  top: 10.0,
+  start: 20.0,
+  width: 100.0,
+  height: 50.0,
+  child: ColoredBox(color: Colors.orange),
+)''',
+  ),
+  WidgetInfo(
+    name: 'PositionedTransition',
+    category: WidgetCategory.animation,
+    description:
+        'Animates the position of a child inside a Stack from a start rect to an end rect.',
+    rnEquivalent: 'React Native\'s Animated / Reanimated absolute offset animations '
+        '(interpolating top, left, width, height layout styles on an Animated.View).',
+    demoBuilder: (_) => const PositionedTransitionDemo(),
+    dartCode: '''PositionedTransition(
+  rect: rectAnimation,
+  child: Container(color: Colors.blue),
+)''',
+  ),
+  WidgetInfo(
+    name: 'PreferredSize',
+    category: WidgetCategory.layout,
+    description:
+        'A widget with a preferred size that does not impose constraints on its child.',
+    rnEquivalent: 'React Native layout does not use size contracts. '
+        'Components specify height and width directly in stylesheets, '
+        'and parent headers/tabs read dimensions dynamically.',
+    demoBuilder: (_) => const PreferredSizeDemo(),
+    dartCode: '''PreferredSize(
+  preferredSize: Size.fromHeight(60.0),
+  child: MyCustomAppBar(),
 )''',
   ),
 ];

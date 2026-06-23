@@ -893,4 +893,249 @@ void main() {
     await tester.pump();
     expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
   });
+
+  // ── Batch 15 ──────────────────────────────────────────────────────────────
+
+  testWidgets('Batch 15: OrientationBuilder renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'OrientationBuilder');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 15: OverflowBar renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'OverflowBar');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 15: OverflowBox renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'OverflowBox');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 15: PageView renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'PageView');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 15: Padding renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Padding');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 15: PhysicalModel renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'PhysicalModel');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  // ── Batch 16 ──────────────────────────────────────────────────────────────
+
+  testWidgets('Batch 16: PhysicalShape renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'PhysicalShape');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 16: Placeholder renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Placeholder');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 16: Positioned renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Positioned');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 16: PositionedDirectional renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'PositionedDirectional');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 16: PositionedTransition renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'PositionedTransition');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 16: PreferredSize renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'PreferredSize');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
 }
+
