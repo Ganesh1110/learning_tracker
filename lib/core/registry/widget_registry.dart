@@ -173,6 +173,30 @@ import 'package:learning_tracker/demos/painting/flutter_logo_demo.dart';
 import 'package:learning_tracker/explanations/painting/flutter_logo_explanation.dart';
 import 'package:learning_tracker/demos/interaction/focus_demo.dart';
 import 'package:learning_tracker/explanations/interaction/focus_explanation.dart';
+import 'package:learning_tracker/demos/interaction/focusable_action_detector_demo.dart';
+import 'package:learning_tracker/explanations/interaction/focusable_action_detector_explanation.dart';
+import 'package:learning_tracker/demos/interaction/focus_traversal_group_demo.dart';
+import 'package:learning_tracker/explanations/interaction/focus_traversal_group_explanation.dart';
+import 'package:learning_tracker/demos/input/form_demo.dart';
+import 'package:learning_tracker/explanations/input/form_explanation.dart';
+import 'package:learning_tracker/demos/input/form_field_demo.dart';
+import 'package:learning_tracker/explanations/input/form_field_explanation.dart';
+import 'package:learning_tracker/demos/layout/fractionally_sized_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/fractionally_sized_box_explanation.dart';
+import 'package:learning_tracker/demos/async/future_builder_demo.dart';
+import 'package:learning_tracker/explanations/async/future_builder_explanation.dart';
+import 'package:learning_tracker/demos/interaction/gesture_detector_demo.dart';
+import 'package:learning_tracker/explanations/interaction/gesture_detector_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/grid_view_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/grid_view_explanation.dart';
+import 'package:learning_tracker/demos/animation/hero_demo.dart';
+import 'package:learning_tracker/explanations/animation/hero_explanation.dart';
+import 'package:learning_tracker/demos/painting/icon_demo.dart';
+import 'package:learning_tracker/explanations/painting/icon_explanation.dart';
+import 'package:learning_tracker/demos/interaction/ignore_pointer_demo.dart';
+import 'package:learning_tracker/explanations/interaction/ignore_pointer_explanation.dart';
+import 'package:learning_tracker/demos/painting/image_demo.dart';
+import 'package:learning_tracker/explanations/painting/image_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1552,6 +1576,214 @@ MaterialApp(
     print('Focused: \$hasFocus');
   },
   child: MyFocusableWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'FocusableActionDetector',
+    category: WidgetCategory.interaction,
+    description:
+        'A wrapper widget that combines focus control, hover states, action mappings, and keyboard shortcut triggers.',
+    rnEquivalent: focusableActionDetectorRnEquivalent,
+    demoBuilder: (_) => const FocusableActionDetectorDemo(),
+    dartCode: '''FocusableActionDetector(
+  shortcuts: {
+    SingleActivator(LogicalKeyboardKey.enter): selectIntent,
+  },
+  actions: {
+    selectIntent: CallbackAction(onInvoke: (intent) => doSelect()),
+  },
+  child: MyButtonWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'FocusTraversalGroup',
+    category: WidgetCategory.interaction,
+    description:
+        'An inherited widget defining keyboard navigation focus traversal policies (like tab order) for a group of descendant focus nodes.',
+    rnEquivalent: focusTraversalGroupRnEquivalent,
+    demoBuilder: (_) => const FocusTraversalGroupDemo(),
+    dartCode: '''FocusTraversalGroup(
+  policy: OrderedTraversalPolicy(),
+  child: Column(
+    children: [
+      FocusTraversalOrder(
+        order: NumericFocusOrder(1.0),
+        child: MyInputWidget(),
+      ),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Form',
+    category: WidgetCategory.input,
+    description:
+        'An optional container widget to manage, validate, save, and reset multiple child FormField inputs together.',
+    rnEquivalent: formRnEquivalent,
+    demoBuilder: (_) => const FormDemo(),
+    dartCode: '''Form(
+  key: _formKey, // GlobalKey<FormState>
+  child: Column(
+    children: [
+      TextFormField(validator: (val) => val!.isEmpty ? 'Error' : null),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'FormField',
+    category: WidgetCategory.input,
+    description:
+        'A wrapper widget holding a single input control state, managing errors, values, and validation callbacks under a parent Form.',
+    rnEquivalent: formFieldRnEquivalent,
+    demoBuilder: (_) => const FormFieldDemo(),
+    dartCode: '''FormField<int>(
+  initialValue: 0,
+  validator: (val) => val == 0 ? 'Invalid' : null,
+  builder: (state) {
+    return MyCustomInput(
+      value: state.value,
+      onChanged: (newVal) => state.didChange(newVal),
+      errorText: state.errorText,
+    );
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'FractionallySizedBox',
+    category: WidgetCategory.layout,
+    description:
+        'A layout widget that sizes its child to a fractional percentage of the available parent box constraints.',
+    rnEquivalent: fractionallySizedBoxRnEquivalent,
+    demoBuilder: (_) => const FractionallySizedBoxDemo(),
+    dartCode: '''FractionallySizedBox(
+  widthFactor: 0.8, // 80% width
+  heightFactor: 0.5, // 50% height
+  alignment: Alignment.center,
+  child: Container(color: Colors.blue),
+)''',
+  ),
+  WidgetInfo(
+    name: 'FutureBuilder',
+    category: WidgetCategory.async,
+    description:
+        'An async layout helper widget that automatically registers build callbacks responding to Future promise resolution states.',
+    rnEquivalent: futureBuilderRnEquivalent,
+    demoBuilder: (_) => const FutureBuilderDemo(),
+    dartCode: '''FutureBuilder<String>(
+  future: fetchProfileData(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return CircularProgressIndicator();
+    }
+    if (snapshot.hasData) {
+      return Text('Loaded: \${snapshot.data}');
+    }
+    return Text('Error');
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'GestureDetector',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that detects gestures (taps, drags, scales) by listening to pointer events.',
+    rnEquivalent: gestureDetectorRnEquivalent,
+    demoBuilder: (_) => const GestureDetectorDemo(),
+    dartCode: '''GestureDetector(
+  onTap: () => print('Tapped!'),
+  onDoubleTap: () => print('Double tapped!'),
+  onLongPress: () => print('Long pressed!'),
+  onPanUpdate: (details) => print('Dragging: \${details.localPosition}'),
+  child: Container(
+    color: Colors.blue,
+    child: Text('Interact with me'),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'GridView',
+    category: WidgetCategory.scrolling,
+    description:
+        'A scrollable, 2D array of widgets.',
+    rnEquivalent: gridViewRnEquivalent,
+    demoBuilder: (_) => const GridViewDemo(),
+    dartCode: '''GridView.builder(
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 3,
+    crossAxisSpacing: 8,
+    mainAxisSpacing: 8,
+  ),
+  itemCount: 20,
+  itemBuilder: (context, index) => Card(
+    child: Center(child: Text('Item \$index')),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Hero',
+    category: WidgetCategory.animation,
+    description:
+        'A widget that marks its child as being a candidate for hero animations (shared element transitions) across route transitions.',
+    rnEquivalent: heroRnEquivalent,
+    demoBuilder: (_) => const HeroDemo(),
+    dartCode: '''// Screen A
+Hero(
+  tag: 'hero-tag-id',
+  child: Image.asset('avatar.png'),
+)
+
+// Screen B
+Hero(
+  tag: 'hero-tag-id',
+  child: Image.asset('avatar.png'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Icon',
+    category: WidgetCategory.painting,
+    description:
+        'A graphical icon widget drawn from a glyph in a font described in an IconData.',
+    rnEquivalent: iconRnEquivalent,
+    demoBuilder: (_) => const IconDemo(),
+    dartCode: '''Icon(
+  Icons.favorite,
+  color: Colors.pink,
+  size: 24.0,
+  semanticLabel: 'Heart icon',
+)''',
+  ),
+  WidgetInfo(
+    name: 'IgnorePointer',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that is invisible during hit testing, causing its subtree to ignore pointer events.',
+    rnEquivalent: ignorePointerRnEquivalent,
+    demoBuilder: (_) => const IgnorePointerDemo(),
+    dartCode: '''IgnorePointer(
+  ignoring: true, // ignore pointer events
+  child: ElevatedButton(
+    onPressed: () => print('Cannot click me'),
+    child: Text('Button'),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Image',
+    category: WidgetCategory.painting,
+    description:
+        'A widget that displays an image, supporting various sources like network URLs, assets, files, or memory.',
+    rnEquivalent: imageRnEquivalent,
+    demoBuilder: (_) => const ImageDemo(),
+    dartCode: '''Image.network(
+  'https://example.com/image.png',
+  fit: BoxFit.cover,
+  loadingBuilder: (context, child, progress) {
+    return progress == null ? child : CircularProgressIndicator();
+  },
+  errorBuilder: (context, error, stackTrace) {
+    return Icon(Icons.broken_image);
+  },
 )''',
   ),
 ];
