@@ -251,6 +251,18 @@ import 'package:learning_tracker/demos/interaction/semantics_demo.dart';
 import 'package:learning_tracker/demos/painting/shader_mask_demo.dart';
 import 'package:learning_tracker/demos/interaction/shortcuts_demo.dart';
 import 'package:learning_tracker/demos/scrolling/single_child_scroll_view_demo.dart';
+import 'package:learning_tracker/demos/layout/sized_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/sized_box_explanation.dart';
+import 'package:learning_tracker/demos/layout/sized_overflow_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/sized_overflow_box_explanation.dart';
+import 'package:learning_tracker/demos/animation/size_transition_demo.dart';
+import 'package:learning_tracker/explanations/animation/size_transition_explanation.dart';
+import 'package:learning_tracker/demos/animation/slide_transition_demo.dart';
+import 'package:learning_tracker/explanations/animation/slide_transition_explanation.dart';
+import 'package:learning_tracker/demos/scrolling/sliver_to_box_adapter_demo.dart';
+import 'package:learning_tracker/explanations/scrolling/sliver_to_box_adapter_explanation.dart';
+import 'package:learning_tracker/demos/layout/spacer_demo.dart';
+import 'package:learning_tracker/explanations/layout/spacer_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -2555,6 +2567,98 @@ Padding(
   child: Column(
     children: [ ... ],
   ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'SizedBox',
+    category: WidgetCategory.layout,
+    description:
+        'A box with a specified size. If given a child, this widget forces it '
+        'to have the given width and/or height.',
+    rnEquivalent: sizedBoxRnEquivalent,
+    demoBuilder: (_) => const SizedBoxDemo(),
+    dartCode: '''SizedBox(
+  width: 200.0,
+  height: 100.0,
+  child: const Card(child: Center(child: Text('Hello'))),
+)
+
+// Empty spacer usage:
+const SizedBox(height: 16.0)''',
+  ),
+  WidgetInfo(
+    name: 'SizedOverflowBox',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that is a specific size but passes its original constraints '
+        'through to its child, which may then overflow.',
+    rnEquivalent: sizedOverflowBoxRnEquivalent,
+    demoBuilder: (_) => const SizedOverflowBoxDemo(),
+    dartCode: '''SizedOverflowBox(
+  size: const Size(100.0, 100.0),
+  alignment: Alignment.center,
+  child: Container(width: 150.0, height: 150.0, color: Colors.blue),
+)''',
+  ),
+  WidgetInfo(
+    name: 'SizeTransition',
+    category: WidgetCategory.animation,
+    description:
+        'Animates its own width or height to reveal or clip its child.',
+    rnEquivalent: sizeTransitionRnEquivalent,
+    demoBuilder: (_) => const SizeTransitionDemo(),
+    dartCode: '''SizeTransition(
+  sizeFactor: _animation,
+  axis: Axis.vertical,
+  axisAlignment: 0.0,
+  child: const MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'SlideTransition',
+    category: WidgetCategory.animation,
+    description:
+        'Animates the position of a child relative to its normal position.',
+    rnEquivalent: slideTransitionRnEquivalent,
+    demoBuilder: (_) => const SlideTransitionDemo(),
+    dartCode: '''SlideTransition(
+  position: _offsetAnimation,
+  child: const MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'SliverToBoxAdapter',
+    category: WidgetCategory.scrolling,
+    description:
+        'A sliver that contains a single box widget.',
+    rnEquivalent: sliverToBoxAdapterRnEquivalent,
+    demoBuilder: (_) => const SliverToBoxAdapterDemo(),
+    dartCode: '''CustomScrollView(
+  slivers: [
+    SliverToBoxAdapter(
+      child: MyCustomHeader(),
+    ),
+    SliverList(
+      delegate: SliverChildBuilderDelegate(...),
+    ),
+  ],
+)''',
+  ),
+  WidgetInfo(
+    name: 'Spacer',
+    category: WidgetCategory.layout,
+    description:
+        'Creates an adjustable, empty spacer that can be used to tune the spacing between widgets in a Flex container.',
+    rnEquivalent: spacerRnEquivalent,
+    demoBuilder: (_) => const SpacerDemo(),
+    dartCode: '''Row(
+  children: const <Widget>[
+    Text('Begin'),
+    Spacer(), // defaults to flex: 1
+    Text('Middle'),
+    Spacer(flex: 2),
+    Text('End'),
+  ],
 )''',
   ),
 ];

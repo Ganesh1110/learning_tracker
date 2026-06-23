@@ -1381,5 +1381,127 @@ void main() {
     await tester.pump();
     expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
   });
+
+  // ── Batch 19 ──────────────────────────────────────────────────────────────
+
+  testWidgets('Batch 19: SizedBox renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SizedBox');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 19: SizedOverflowBox renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SizedOverflowBox');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 19: SizeTransition renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SizeTransition');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 19: SlideTransition renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SlideTransition');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 19: SliverToBoxAdapter renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SliverToBoxAdapter');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 19: Spacer renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Spacer');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
 }
 
