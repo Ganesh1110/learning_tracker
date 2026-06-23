@@ -239,6 +239,12 @@ import 'package:learning_tracker/demos/layout/positioned_demo.dart';
 import 'package:learning_tracker/demos/layout/positioned_directional_demo.dart';
 import 'package:learning_tracker/demos/animation/positioned_transition_demo.dart';
 import 'package:learning_tracker/demos/layout/preferred_size_demo.dart';
+import 'package:learning_tracker/demos/painting/raw_image_demo.dart';
+import 'package:learning_tracker/demos/animation/relative_positioned_transition_demo.dart';
+import 'package:learning_tracker/demos/painting/repaint_boundary_demo.dart';
+import 'package:learning_tracker/demos/layout/rotated_box_demo.dart';
+import 'package:learning_tracker/demos/animation/rotation_transition_demo.dart';
+import 'package:learning_tracker/demos/layout/row_demo.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -2366,6 +2372,90 @@ Padding(
     dartCode: '''PreferredSize(
   preferredSize: Size.fromHeight(60.0),
   child: MyCustomAppBar(),
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'RawImage',
+    category: WidgetCategory.painting,
+    description:
+        'A low-level widget that displays a dart:ui.Image directly.',
+    rnEquivalent: 'No direct equivalent. React Native developers must convert '
+        'bitmaps to base64 URIs or write custom native drawing layers.',
+    demoBuilder: (_) => const RawImageDemo(),
+    dartCode: '''RawImage(
+  image: uiImage,
+  scale: 2.0,
+  color: Colors.teal,
+  colorBlendMode: BlendMode.modulate,
+)''',
+  ),
+  WidgetInfo(
+    name: 'RelativePositionedTransition',
+    category: WidgetCategory.animation,
+    description:
+        'Animates a child\'s position within a Stack relative to a fixed reference size.',
+    rnEquivalent: 'React Native style property animations mapped to left/top/width/height '
+        'interpolations, utilizing measurements from parent onLayout callbacks.',
+    demoBuilder: (_) => const RelativePositionedTransitionDemo(),
+    dartCode: '''RelativePositionedTransition(
+  rect: rectAnimation,
+  size: Size(200, 150),
+  child: MyBox(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'RepaintBoundary',
+    category: WidgetCategory.painting,
+    description:
+        'Isolates child painting to prevent parent updates from forcing a redraw.',
+    rnEquivalent: 'Optimization props: renderToHardwareTextureAndroid (Android) '
+        'and shouldRasterizeIOS (iOS) which cache views as bitmaps on the GPU.',
+    demoBuilder: (_) => const RepaintBoundaryDemo(),
+    dartCode: '''RepaintBoundary(
+  child: MyComplexCanvasDrawing(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'RotatedBox',
+    category: WidgetCategory.layout,
+    description:
+        'Rotates its child by a number of quarter turns, updating layout constraints.',
+    rnEquivalent: 'transform: [{ rotate: "90deg" }] styling in React Native. '
+        'Note that React Native transforms do not modify parent layout bounds.',
+    demoBuilder: (_) => const RotatedBoxDemo(),
+    dartCode: '''RotatedBox(
+  quarterTurns: 1,
+  child: Text('Rotated by 90 degrees'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'RotationTransition',
+    category: WidgetCategory.animation,
+    description:
+        'Animates the rotation of a child widget using an AnimationController.',
+    rnEquivalent: 'React Native\'s style transforms: transform: [{ rotate: spinInterpolate }].',
+    demoBuilder: (_) => const RotationTransitionDemo(),
+    dartCode: '''RotationTransition(
+  turns: animationController,
+  child: Icon(Icons.settings),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Row',
+    category: WidgetCategory.layout,
+    description:
+        'Lays out its children in a horizontal array (flexbox row equivalent).',
+    rnEquivalent: '<View style={{ flexDirection: "row" }} /> along with '
+        'justifyContent and alignItems style configurations.',
+    demoBuilder: (_) => const RowDemo(),
+    dartCode: '''Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    Box1(),
+    Box2(),
+  ],
 )''',
   ),
 ];

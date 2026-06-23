@@ -1137,5 +1137,127 @@ void main() {
     await tester.pump();
     expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
   });
+
+  // ── Batch 17 ──────────────────────────────────────────────────────────────
+
+  testWidgets('Batch 17: RawImage renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'RawImage');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 17: RelativePositionedTransition renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'RelativePositionedTransition');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 17: RepaintBoundary renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'RepaintBoundary');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 17: RotatedBox renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'RotatedBox');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 17: RotationTransition renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'RotationTransition');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 17: Row renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Row');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
 }
 
