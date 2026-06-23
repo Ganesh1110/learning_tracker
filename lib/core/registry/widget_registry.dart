@@ -197,6 +197,18 @@ import 'package:learning_tracker/demos/interaction/ignore_pointer_demo.dart';
 import 'package:learning_tracker/explanations/interaction/ignore_pointer_explanation.dart';
 import 'package:learning_tracker/demos/painting/image_demo.dart';
 import 'package:learning_tracker/explanations/painting/image_explanation.dart';
+import 'package:learning_tracker/demos/interaction/interactive_viewer_demo.dart';
+import 'package:learning_tracker/explanations/interaction/interactive_viewer_explanation.dart';
+import 'package:learning_tracker/demos/layout/intrinsic_height_demo.dart';
+import 'package:learning_tracker/explanations/layout/intrinsic_height_explanation.dart';
+import 'package:learning_tracker/demos/layout/intrinsic_width_demo.dart';
+import 'package:learning_tracker/explanations/layout/intrinsic_width_explanation.dart';
+import 'package:learning_tracker/demos/interaction/keyboard_listener_demo.dart';
+import 'package:learning_tracker/explanations/interaction/keyboard_listener_explanation.dart';
+import 'package:learning_tracker/demos/layout/layout_builder_demo.dart';
+import 'package:learning_tracker/explanations/layout/layout_builder_explanation.dart';
+import 'package:learning_tracker/demos/layout/limited_box_demo.dart';
+import 'package:learning_tracker/explanations/layout/limited_box_explanation.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -1784,6 +1796,99 @@ Hero(
   errorBuilder: (context, error, stackTrace) {
     return Icon(Icons.broken_image);
   },
+)''',
+  ),
+  WidgetInfo(
+    name: 'InteractiveViewer',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that enables pan and zoom interactions on its child.',
+    rnEquivalent: interactiveViewerRnEquivalent,
+    demoBuilder: (_) => const InteractiveViewerDemo(),
+    dartCode: '''InteractiveViewer(
+  panEnabled: true,
+  scaleEnabled: true,
+  minScale: 0.5,
+  maxScale: 4.0,
+  child: Image.asset('map.png'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'IntrinsicHeight',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that sizes its child to the child\'s intrinsic height, aligning sibling widgets vertically.',
+    rnEquivalent: intrinsicHeightRnEquivalent,
+    demoBuilder: (_) => const IntrinsicHeightDemo(),
+    dartCode: '''IntrinsicHeight(
+  child: Row(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Column1(),
+      VerticalDivider(),
+      Column2(),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'IntrinsicWidth',
+    category: WidgetCategory.layout,
+    description:
+        'A widget that sizes its child to the child\'s intrinsic width, aligning sibling widgets horizontally.',
+    rnEquivalent: intrinsicWidthRnEquivalent,
+    demoBuilder: (_) => const IntrinsicWidthDemo(),
+    dartCode: '''IntrinsicWidth(
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Button1(),
+      Button2(),
+    ],
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'KeyboardListener',
+    category: WidgetCategory.interaction,
+    description:
+        'A widget that calls a callback whenever the user presses or releases a key on a keyboard.',
+    rnEquivalent: keyboardListenerRnEquivalent,
+    demoBuilder: (_) => const KeyboardListenerDemo(),
+    dartCode: '''KeyboardListener(
+  focusNode: myFocusNode,
+  onKeyEvent: (KeyEvent event) {
+    print('Key: \${event.logicalKey.keyLabel}');
+  },
+  child: MyFocusableWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'LayoutBuilder',
+    category: WidgetCategory.layout,
+    description:
+        'Builds a widget tree that can depend on the parent widget\'s size constraints.',
+    rnEquivalent: layoutBuilderRnEquivalent,
+    demoBuilder: (_) => const LayoutBuilderDemo(),
+    dartCode: '''LayoutBuilder(
+  builder: (context, constraints) {
+    if (constraints.maxWidth > 600) {
+      return WideLayout();
+    }
+    return NarrowLayout();
+  },
+)''',
+  ),
+  WidgetInfo(
+    name: 'LimitedBox',
+    category: WidgetCategory.layout,
+    description:
+        'A box that limits its size only when its extra dimensions are unconstrained by parent constraints.',
+    rnEquivalent: limitedBoxRnEquivalent,
+    demoBuilder: (_) => const LimitedBoxDemo(),
+    dartCode: '''LimitedBox(
+  maxHeight: 100.0,
+  child: Container(color: Colors.blue),
 )''',
   ),
 ];
