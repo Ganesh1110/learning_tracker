@@ -245,6 +245,12 @@ import 'package:learning_tracker/demos/painting/repaint_boundary_demo.dart';
 import 'package:learning_tracker/demos/layout/rotated_box_demo.dart';
 import 'package:learning_tracker/demos/animation/rotation_transition_demo.dart';
 import 'package:learning_tracker/demos/layout/row_demo.dart';
+import 'package:learning_tracker/demos/layout/safe_area_demo.dart';
+import 'package:learning_tracker/demos/animation/scale_transition_demo.dart';
+import 'package:learning_tracker/demos/interaction/semantics_demo.dart';
+import 'package:learning_tracker/demos/painting/shader_mask_demo.dart';
+import 'package:learning_tracker/demos/interaction/shortcuts_demo.dart';
+import 'package:learning_tracker/demos/scrolling/single_child_scroll_view_demo.dart';
 
 final List<WidgetInfo> widgetRegistry = [
   WidgetInfo(
@@ -2456,6 +2462,99 @@ Padding(
     Box1(),
     Box2(),
   ],
+)''',
+  ),
+
+  WidgetInfo(
+    name: 'SafeArea',
+    category: WidgetCategory.layout,
+    description:
+        'Inserts padding to avoid system features such as status bars and notches.',
+    rnEquivalent: 'React Native\'s <SafeAreaView> or hooks from '
+        'react-native-safe-area-context.',
+    demoBuilder: (_) => const SafeAreaDemo(),
+    dartCode: '''SafeArea(
+  top: true,
+  bottom: true,
+  child: Text('Protected content'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ScaleTransition',
+    category: WidgetCategory.animation,
+    description:
+        'Animates the scale factor of a child widget.',
+    rnEquivalent: 'React Native style scale transforms: transform: [{ scale: animVal }].',
+    demoBuilder: (_) => const ScaleTransitionDemo(),
+    dartCode: '''ScaleTransition(
+  scale: scaleAnimation,
+  alignment: Alignment.center,
+  child: MyWidget(),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Semantics',
+    category: WidgetCategory.interaction,
+    description:
+        'Annotates the widget tree with accessibility descriptions for screen readers.',
+    rnEquivalent: 'React Native accessibility props such as accessible, '
+        'accessibilityLabel, accessibilityHint, and accessibilityRole.',
+    demoBuilder: (_) => const SemanticsDemo(),
+    dartCode: '''Semantics(
+  label: 'Add item',
+  hint: 'Adds shopping item',
+  button: true,
+  child: GestureDetector(onTap: () {}),
+)''',
+  ),
+  WidgetInfo(
+    name: 'ShaderMask',
+    category: WidgetCategory.painting,
+    description:
+        'Applies a shader (like a gradient) to its child widget using blend modes.',
+    rnEquivalent: 'MaskedView libraries combined with gradient layouts, or direct SVG gradients.',
+    demoBuilder: (_) => const ShaderMaskDemo(),
+    dartCode: '''ShaderMask(
+  shaderCallback: (bounds) => LinearGradient(
+    colors: [Colors.purple, Colors.orange],
+  ).createShader(bounds),
+  blendMode: BlendMode.srcIn,
+  child: Text('Gradient Text'),
+)''',
+  ),
+  WidgetInfo(
+    name: 'Shortcuts',
+    category: WidgetCategory.interaction,
+    description:
+        'Maps keyboard key combinations to intents in the widget tree.',
+    rnEquivalent: 'Custom raw event listeners (window.addEventListener on Web) '
+        'or native keyboard wrappers on mobile.',
+    demoBuilder: (_) => const ShortcutsDemo(),
+    dartCode: '''Shortcuts(
+  shortcuts: <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.keyI, control: true): const IncrementIntent(),
+  },
+  child: Actions(
+    actions: <Type, Action<Intent>>{
+      IncrementIntent: CallbackAction<IncrementIntent>(onInvoke: (_) => increment()),
+    },
+    child: Focus(child: MyWidget()),
+  ),
+)''',
+  ),
+  WidgetInfo(
+    name: 'SingleChildScrollView',
+    category: WidgetCategory.scrolling,
+    description:
+        'A scrollable container that holds a single child layout.',
+    rnEquivalent: 'React Native\'s standard <ScrollView> component.',
+    demoBuilder: (_) => const SingleChildScrollViewDemo(),
+    dartCode: '''SingleChildScrollView(
+  scrollDirection: Axis.vertical,
+  physics: BouncingScrollPhysics(),
+  child: Column(
+    children: [ ... ],
+  ),
 )''',
   ),
 ];

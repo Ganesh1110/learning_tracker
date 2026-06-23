@@ -1259,5 +1259,127 @@ void main() {
     await tester.pump();
     expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
   });
+
+  // ── Batch 18 ──────────────────────────────────────────────────────────────
+
+  testWidgets('Batch 18: SafeArea renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SafeArea');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 18: ScaleTransition renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'ScaleTransition');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 18: Semantics renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Semantics');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 18: ShaderMask renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'ShaderMask');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 18: Shortcuts renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'Shortcuts');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
+
+  testWidgets('Batch 18: SingleChildScrollView renders successfully',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1600, 1600);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    final widgetInfo =
+        widgetRegistry.firstWhere((w) => w.name == 'SingleChildScrollView');
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+            body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Builder(
+                    builder: (context) => widgetInfo.demoBuilder(context))))));
+    await tester.pump();
+    expect(find.byWidgetPredicate((_) => true), findsAtLeast(1));
+  });
 }
 
